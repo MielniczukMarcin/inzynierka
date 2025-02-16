@@ -1,0 +1,4 @@
+1. A_Comparative_Study_of_Rough_Set_Theoretic_Decision_Tree_Induction_Algorithms - https://ieeexplore.ieee.org/document/8550978
+2. Classifying_Student_Achievement_Using_K-NN_Based_on_Feature_Normalization_Techniques - https://ieeexplore.ieee.org/document/10295372
+3. podstawy_uczenia - https://winntbg.bg.agh.edu.pl/skrypty4/0599/podstawy_uczenia.pdf
+4. https://helion.pl/ksiazki/uczenie-maszynowe-z-uzyciem-scikit-learn-keras-i-tensorflow-wydanie-iii-aurelien-geron,uczem3.htm?srsltid=AfmBOoo1SXKX-QrXy4nAvVxybG5mpdfs0DR3RO6XaHd3SVEp9EcPjfXu#format/d
