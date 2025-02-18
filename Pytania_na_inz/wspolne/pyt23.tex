@@ -1,0 +1,119 @@
+\section{Podstawowe modele kontroli dostępu}
+
+\subsection{Wprowadzenie}
+Kontrola dostępu to mechanizm zapewniający bezpieczeństwo systemów informatycznych poprzez ograniczenie dostępu do zasobów. Istnieją różne modele kontroli dostępu, które definiują zasady przyznawania i egzekwowania uprawnień użytkowników.
+
+\subsection{Główne modele kontroli dostępu}
+
+\subsubsection{1. Kontrola dostępu oparta na listach kontroli dostępu (ACL – Access Control List)}
+ACL to zbiór reguł określających, kto i w jaki sposób może uzyskać dostęp do danego zasobu.
+
+\textbf{Cechy modelu ACL:}
+\begin{itemize}
+    \item Każdy zasób ma przypisaną listę użytkowników i ich uprawnień.
+    \item Można definiować szczegółowe reguły dostępu dla poszczególnych użytkowników lub grup.
+\end{itemize}
+
+\textbf{Przykłady zastosowań:}
+\begin{itemize}
+    \item Systemy plików (np. NTFS w Windows).
+    \item Zapory sieciowe (firewalle).
+\end{itemize}
+
+\subsubsection{2. Dyskrecjonalna kontrola dostępu (DAC – Discretionary Access Control)}
+DAC pozwala właścicielowi zasobu na dowolne zarządzanie dostępem do niego.
+
+\textbf{Cechy modelu DAC:}
+\begin{itemize}
+    \item Uprawnienia mogą być przekazywane innym użytkownikom.
+    \item Umożliwia elastyczne zarządzanie dostępem.
+\end{itemize}
+
+\textbf{Wady modelu DAC:}
+\begin{itemize}
+    \item Możliwość nieautoryzowanego przekazywania uprawnień.
+    \item Brak centralnej kontroli nad dostępem.
+\end{itemize}
+
+\textbf{Przykłady zastosowań:}
+\begin{itemize}
+    \item Systemy operacyjne Windows i Linux.
+    \item Systemy bazodanowe.
+\end{itemize}
+
+\subsubsection{3. Obowiązkowa kontrola dostępu (MAC – Mandatory Access Control)}
+MAC to model, w którym uprawnienia są przydzielane centralnie przez administratora i użytkownicy nie mogą ich zmieniać.
+
+\textbf{Cechy modelu MAC:}
+\begin{itemize}
+    \item Każdy zasób i użytkownik mają przypisane poziomy klasyfikacji (np. tajne, poufne).
+    \item System decyduje, kto może uzyskać dostęp na podstawie polityk bezpieczeństwa.
+\end{itemize}
+
+\textbf{Przykłady zastosowań:}
+\begin{itemize}
+    \item Systemy rządowe i wojskowe.
+    \item Bezpieczne systemy operacyjne (np. SELinux).
+\end{itemize}
+
+\subsubsection{4. Kontrola dostępu oparta na rolach (RBAC – Role-Based Access Control)}
+RBAC przyznaje użytkownikom uprawnienia na podstawie przypisanych im ról.
+
+\textbf{Cechy modelu RBAC:}
+\begin{itemize}
+    \item Użytkownicy są przypisani do ról, a role posiadają określone uprawnienia.
+    \item Ułatwia zarządzanie uprawnieniami w dużych organizacjach.
+\end{itemize}
+
+\textbf{Przykłady zastosowań:}
+\begin{itemize}
+    \item Systemy korporacyjne (np. ERP).
+    \item Systemy baz danych i chmury obliczeniowe.
+\end{itemize}
+
+\subsubsection{5. Kontrola dostępu oparta na atrybutach (ABAC – Attribute-Based Access Control)}
+ABAC przyznaje dostęp na podstawie atrybutów użytkownika, zasobu i kontekstu.
+
+\textbf{Cechy modelu ABAC:}
+\begin{itemize}
+    \item Uprawnienia są dynamicznie przyznawane na podstawie atrybutów (np. lokalizacja, czas).
+    \item Zapewnia wysoką elastyczność i bezpieczeństwo.
+\end{itemize}
+
+\textbf{Przykłady zastosowań:}
+\begin{itemize}
+    \item Zaawansowane systemy bezpieczeństwa w chmurze.
+    \item Systemy zgodne z regulacjami (np. HIPAA, GDPR).
+\end{itemize}
+
+\subsection{Porównanie modeli kontroli dostępu}
+
+\begin{table}[h]
+    \centering
+    \renewcommand{\arraystretch}{1.3} % Zwiększa odstępy między wierszami dla lepszej czytelności
+    \begin{tabularx}{\textwidth}{|l|X|X|}
+        \hline
+        \textbf{Model} & \textbf{Cechy} & \textbf{Zastosowanie} \\
+        \hline
+        ACL  & Lista reguł dla zasobu  & Systemy plików, firewalle \\
+        \hline
+        DAC  & Właściciel zasobu zarządza dostępem  & Systemy operacyjne, bazy danych \\
+        \hline
+        MAC  & Centralne zarządzanie dostępem  & Systemy rządowe, wojskowe \\
+        \hline
+        RBAC & Uprawnienia nadawane według ról  & Organizacje, systemy ERP \\
+        \hline
+        ABAC & Dynamiczne uprawnienia na podstawie atrybutów  & Systemy chmurowe, zgodność z regulacjami \\
+        \hline
+    \end{tabularx}
+    \caption{Porównanie modeli kontroli dostępu}
+\end{table}
+
+
+\subsection{Podsumowanie}
+\begin{itemize}
+    \item Kontrola dostępu jest kluczowym elementem bezpieczeństwa systemów informatycznych.
+    \item Modele ACL i DAC są stosowane w systemach operacyjnych i bazach danych.
+    \item MAC zapewnia najwyższy poziom bezpieczeństwa w systemach rządowych i wojskowych.
+    \item RBAC i ABAC są szeroko stosowane w dużych organizacjach i systemach chmurowych.
+\end{itemize}

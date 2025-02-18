@@ -1,0 +1,140 @@
+\section{Strategia projektowania „dziel i zwyciężaj”}
+
+\subsection{Zasada realizacji strategii}
+Strategia „dziel i zwyciężaj” (ang. \textit{divide and conquer}) jest jednym z fundamentalnych paradygmatów algorytmicznych. Opiera się na rekurencyjnym podziale problemu na mniejsze podproblemy, ich niezależnym rozwiązaniu, a następnie scaleniu wyników w celu uzyskania ostatecznego rozwiązania.
+
+Typowy algorytm oparty na strategii „dziel i zwyciężaj” składa się z trzech głównych etapów:
+\begin{enumerate}
+    \item \textbf{Podział (Divide)} – problem dzielony jest na kilka mniejszych podproblemów o podobnej strukturze.
+    \item \textbf{Rozwiązanie (Conquer)} – podproblemy są rozwiązywane rekurencyjnie, aż do osiągnięcia przypadku bazowego.
+    \item \textbf{Scalanie (Combine)} – rozwiązania podproblemów są łączone w celu uzyskania rozwiązania pierwotnego problemu.
+\end{enumerate}
+
+Strategia ta znajduje szerokie zastosowanie w sortowaniu, wyszukiwaniu, obliczeniach numerycznych oraz problemach geometrycznych i grafowych.
+
+\subsection{Przykłady zastosowania strategii}
+
+\subsubsection{Sortowanie szybkie (QuickSort)}
+Algorytm QuickSort stosuje strategię „dziel i zwyciężaj” do sortowania tablicy poprzez rekurencyjny podział na mniejsze fragmenty.
+
+\textbf{Opis działania:}
+\begin{enumerate}
+    \item Wybierany jest element zwany \textbf{pivotem} (np. pierwszy, ostatni, środkowy lub losowy element tablicy).
+    \item Tablica jest dzielona na dwie części:
+        \begin{itemize}
+            \item elementy mniejsze od pivota,
+            \item elementy większe od pivota.
+        \end{itemize}
+    \item QuickSort jest wywoływany rekurencyjnie na obu częściach tablicy.
+    \item Po zakończeniu rekurencji otrzymujemy posortowaną tablicę.
+\end{enumerate}
+
+\textbf{Złożoność QuickSort:}
+\begin{itemize}
+    \item \textbf{Najlepszy przypadek:} \( O(n \log n) \), gdy pivot zawsze dzieli tablicę na dwie równe części.
+    \item \textbf{Średni przypadek:} \( O(n \log n) \), gdy pivot zazwyczaj dobrze dzieli tablicę.
+    \item \textbf{Najgorszy przypadek:} \( O(n^2) \), gdy pivot zawsze wybierany jest najgorzej (np. najmniejszy lub największy element).
+\end{itemize}
+
+\subsubsection{Sortowanie przez scalanie (MergeSort)}
+MergeSort to stabilny algorytm sortowania, który również stosuje podejście „dziel i zwyciężaj”.
+
+\textbf{Opis działania:}
+\begin{enumerate}
+    \item Tablica jest dzielona na dwie równe części.
+    \item Obie części są sortowane rekurencyjnie.
+    \item Posortowane tablice są scalane w jedną uporządkowaną tablicę.
+\end{enumerate}
+
+\textbf{Złożoność MergeSort:}
+\begin{itemize}
+    \item W każdym poziomie rekurencji algorytm wykonuje \( O(n) \) operacji scalania.
+    \item Liczba poziomów rekurencji wynosi \( O(\log n) \).
+    \item Łączna złożoność: \( O(n \log n) \) w każdym przypadku.
+\end{itemize}
+
+\subsubsection{Minimalne drzewo rozpinające (MST) – Algorytm Kruskala}
+Algorytm Kruskala znajduje minimalne drzewo rozpinające (ang. \textit{Minimum Spanning Tree, MST}) dla spójnego grafu ważonego.
+
+\textbf{Opis działania:}
+\begin{enumerate}
+    \item Wszystkie krawędzie grafu są sortowane według wag w porządku niemalejącym (sortowanie można wykonać metodą MergeSort lub QuickSort).
+    \item Krawędzie są dodawane do MST w kolejności rosnącej wagi, o ile nie tworzą cyklu.
+    \item Struktura zbiorów rozłącznych (ang. \textit{Union-Find}) pozwala efektywnie zarządzać dołączaniem wierzchołków.
+\end{enumerate}
+
+\textbf{Złożoność algorytmu Kruskala:}
+\begin{itemize}
+    \item Sortowanie krawędzi: \( O(E \log E) \).
+    \item Przetwarzanie zbiorów rozłącznych: \( O(E \alpha(V)) \), gdzie \( \alpha \) to powoli rosnąca funkcja iterowanego logarytmu.
+    \item Łączna złożoność: \( O(E \log E) \).
+\end{itemize}
+
+\subsubsection{Inne przykłady algorytmów „dziel i zwyciężaj”}
+\begin{itemize}
+    \item \textbf{Algorytm Karacuby} – szybkie mnożenie dużych liczb (\( O(n^{1.585}) \)).
+    \item \textbf{Najbliższa para punktów} – znajdowanie dwóch najbliższych punktów w płaszczyźnie (\( O(n \log n) \)).
+    \item \textbf{Szybkie potęgowanie} – algorytm obliczający \( a^b \mod m \) w czasie \( O(\log b) \).
+    \item \textbf{FFT (Fast Fourier Transform)} – szybka transformata Fouriera, stosowana w analizie sygnałów i kryptografii (\( O(n \log n) \)).
+\end{itemize}
+\subsection{Szacowanie asymptotycznej złożoności uzyskanych algorytmów}
+
+Asymptotyczna złożoność obliczeniowa określa, jak czas działania algorytmu zmienia się wraz ze wzrostem rozmiaru wejścia \( n \). Jest kluczowym aspektem analizy algorytmów i pozwala porównywać ich efektywność.
+
+\subsubsection{Szacowanie złożoności rekurencyjnych algorytmów „dziel i zwyciężaj”}
+
+Wiele algorytmów opartych na tej strategii można przedstawić w postaci rekurencyjnej zależności czasowej. Istnieją różne metody jej rozwiązywania, w tym:
+
+\begin{itemize}
+    \item Metoda podstawiania (\textit{substitution method}).
+    \item Metoda drzew rekurencji (\textit{recursion tree method}).
+    \item Twierdzenie o rekurencji Mistrza (\textit{Master Theorem}).
+\end{itemize}
+
+\paragraph{Twierdzenie Mistrza}
+Dla rekurencji postaci:
+\[
+T(n) = aT(n/b) + O(n^d),
+\]
+gdzie:
+\begin{itemize}
+    \item \( a \) – liczba podproblemów,
+    \item \( b \) – czynnik zmniejszania rozmiaru podproblemu,
+    \item \( O(n^d) \) – koszt scalania wyników, 
+ \end{itemize}   
+    możemy określić asymptotyczną złożoność na podstawie porównania \( d \) i \( \log_b a \):
+
+\begin{enumerate}
+    \item Jeśli \( d > \log_b a \), to \( T(n) = O(n^d) \).
+    \item Jeśli \( d = \log_b a \), to \( T(n) = O(n^d \log n) \).
+    \item Jeśli \( d < \log_b a \), to \( T(n) = O(n^{\log_b a}) \).
+\end{enumerate}
+
+\subsubsection{Złożoność wybranych algorytmów}
+\begin{itemize}
+    \item \textbf{QuickSort:}  
+    \[
+    T(n) = 2T(n/2) + O(n) \Rightarrow O(n \log n) \quad \text{(średni przypadek)}
+    \]
+    \item \textbf{MergeSort:}  
+    \[
+    T(n) = 2T(n/2) + O(n) \Rightarrow O(n \log n)
+    \]
+    \item \textbf{Algorytm Kruskala:}  
+    \[
+    O(E \log E) \quad \text{(sortowanie krawędzi)}
+    \]
+    \item \textbf{Algorytm Karacuby:}  
+    \[
+    T(n) = 3T(n/2) + O(n) \Rightarrow O(n^{\log_2 3}) \approx O(n^{1.585})
+    \]
+\end{itemize}
+
+Podsumowując, strategia „dziel i zwyciężaj” prowadzi do efektywnych algorytmów o złożoności rzędu \( O(n \log n) \) dla sortowania oraz \( O(E \log E) \) dla problemów grafowych.
+
+\subsection{Podsumowanie}
+\begin{itemize}
+    \item Strategia „dziel i zwyciężaj” polega na podziale problemu na mniejsze podproblemy, ich rozwiązaniu i scaleniu wyników.
+    \item Klasyczne algorytmy oparte na tej strategii to QuickSort (\( O(n \log n) \) w średnim przypadku), MergeSort (\( O(n \log n) \)), algorytm Kruskala (\( O(E \log E) \)) oraz algorytm Karacuby (\( O(n^{1.585}) \)).
+    \item Algorytmy tego typu często osiągają optymalne lub suboptymalne złożoności w porównaniu do algorytmów iteracyjnych.
+\end{itemize}

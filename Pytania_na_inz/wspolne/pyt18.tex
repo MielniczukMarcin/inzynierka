@@ -1,0 +1,90 @@
+\section{Możliwości i ograniczenia transakcji w relacyjnych bazach danych}
+
+\subsection{Wprowadzenie}
+Transakcja w relacyjnej bazie danych to zbiór operacji wykonywanych jako jedna, niepodzielna jednostka. Każda transakcja musi spełniać zasady ACID (Atomicity, Consistency, Isolation, Durability), aby zapewnić spójność i niezawodność systemu bazodanowego.
+
+\subsection{Możliwości transakcji w relacyjnych bazach danych}
+
+\subsubsection{1. Spójność danych (Consistency)}
+Transakcje zapewniają, że baza danych pozostaje w stanie spójnym przed i po wykonaniu transakcji. Jeśli operacja narusza integralność danych, system cofa zmiany.
+
+\textbf{Przykład:}  
+Jeśli przelewamy 100 zł z konta A na konto B, suma środków na obu kontach musi pozostać taka sama.
+
+\begin{verbatim}
+BEGIN TRANSACTION;
+UPDATE Konto SET saldo = saldo - 100 WHERE id = 1;
+UPDATE Konto SET saldo = saldo + 100 WHERE id = 2;
+COMMIT;
+\end{verbatim}
+
+\subsubsection{2. Odporność na błędy (Atomicity)}
+Transakcje są niepodzielne – jeśli któraś operacja nie powiedzie się, cała transakcja zostaje anulowana (\textit{rollback}).
+
+\textbf{Przykład:}  
+Jeśli nastąpi awaria systemu po pierwszej operacji, ale przed drugą, transakcja zostanie wycofana, aby uniknąć niespójności.
+
+\begin{verbatim}
+BEGIN TRANSACTION;
+UPDATE Konto SET saldo = saldo - 100 WHERE id = 1;
+IF ERROR THEN ROLLBACK;
+UPDATE Konto SET saldo = saldo + 100 WHERE id = 2;
+COMMIT;
+\end{verbatim}
+
+\subsubsection{3. Izolacja transakcji (Isolation)}
+Zapewnia, że jednoczesne transakcje nie wpływają na siebie nawzajem. System może używać różnych poziomów izolacji:
+\begin{itemize}
+    \item \textbf{Read Uncommitted} – transakcje mogą odczytywać dane niezatwierdzone przez inne transakcje.
+    \item \textbf{Read Committed} – transakcje odczytują tylko zatwierdzone zmiany.
+    \item \textbf{Repeatable Read} – transakcja widzi te same dane przy każdym odczycie.
+    \item \textbf{Serializable} – najwyższy poziom izolacji, blokuje równoczesne transakcje.
+\end{itemize}
+
+\textbf{Przykład:}  
+Ustawienie izolacji transakcji w SQL Server:
+\begin{verbatim}
+SET TRANSACTION ISOLATION LEVEL SERIALIZABLE;
+BEGIN TRANSACTION;
+SELECT * FROM Konto WHERE id = 1;
+COMMIT;
+\end{verbatim}
+
+\subsubsection{4. Trwałość (Durability)}
+Po zatwierdzeniu transakcji (\texttt{COMMIT}), zmiany są trwale zapisane w bazie, nawet jeśli nastąpi awaria systemu.
+
+\textbf{Przykład:}  
+Po zatwierdzeniu przelewu, saldo konta jest zapisane na dysku i nie można go cofnąć w przypadku awarii.
+
+\subsection{Ograniczenia transakcji w relacyjnych bazach danych}
+
+\subsubsection{1. Problemy współbieżności}
+Równoczesne transakcje mogą powodować konflikty:
+\begin{itemize}
+    \item \textbf{Dirty Read} – transakcja odczytuje dane, które mogą zostać wycofane.
+    \item \textbf{Non-repeatable Read} – dane mogą zmieniać się między odczytami w jednej transakcji.
+    \item \textbf{Phantom Read} – nowe wiersze mogą pojawić się między zapytaniami.
+\end{itemize}
+
+\subsubsection{2. Narzut wydajnościowy}
+Wyższe poziomy izolacji (np. Serializable) mogą prowadzić do blokowania transakcji, co spowalnia działanie systemu.
+
+\subsubsection{3. Problemy z długimi transakcjami}
+Długotrwałe transakcje mogą blokować inne operacje i prowadzić do zatorów w systemie.
+
+\subsubsection{4. Możliwość zakleszczeń (Deadlocks)}
+Jeśli dwie transakcje blokują te same zasoby i czekają na siebie nawzajem, może dojść do zakleszczenia.
+
+\textbf{Przykład:}  
+Transakcja A blokuje tabelę X, a transakcja B blokuje tabelę Y – jeśli A próbuje uzyskać dostęp do Y, a B do X, powstaje zakleszczenie.
+
+\subsubsection{5. Brak wsparcia dla rozproszonych transakcji}
+Niektóre systemy bazodanowe mają ograniczone wsparcie dla transakcji obejmujących wiele baz danych.
+
+\subsection{Podsumowanie}
+\begin{itemize}
+    \item Transakcje zapewniają spójność, atomowość, izolację i trwałość zmian w bazie.
+    \item Mechanizmy izolacji chronią przed błędami współbieżności.
+    \item Ograniczenia obejmują problemy wydajnościowe, zakleszczenia i konflikty transakcji.
+    \item Odpowiednie zarządzanie poziomami izolacji pozwala na optymalizację wydajności systemu.
+\end{itemize}

@@ -1,0 +1,97 @@
+\section{Zarządzanie pamięcią w języku C/C++}
+
+\subsection{Wprowadzenie}
+Zarządzanie pamięcią w językach C i C++ jest kluczowym aspektem programowania, ponieważ oba języki pozwalają na bezpośrednią kontrolę nad alokacją i dealokacją pamięci. Niewłaściwe zarządzanie pamięcią może prowadzić do wycieków pamięci, błędów segmentacji i nieprzewidywalnych zachowań programu.
+
+\subsection{Rodzaje pamięci w C/C++}
+W językach C i C++ można wyróżnić kilka obszarów pamięci:
+
+\begin{itemize}
+    \item \textbf{Pamięć statyczna} – zmienne globalne oraz zmienne zadeklarowane jako \texttt{static} są przechowywane w tej pamięci i istnieją przez cały czas działania programu.
+    \item \textbf{Stos (stack)} – przechowuje zmienne lokalne oraz adresy powrotne funkcji. Pamięć na stosie jest automatycznie zwalniana po zakończeniu funkcji.
+    \item \textbf{Sterta (heap)} – obszar pamięci przeznaczony do dynamicznej alokacji. Zarządzanie pamięcią na stercie jest odpowiedzialnością programisty.
+\end{itemize}
+
+\subsection{Alokacja i dealokacja pamięci w języku C}
+W języku C dynamiczne zarządzanie pamięcią odbywa się za pomocą funkcji bibliotecznych z nagłówka \texttt{stdlib.h}:
+
+\begin{itemize}
+    \item \textbf{\texttt{malloc(size\_t size)}} – alokuje określoną ilość bajtów i zwraca wskaźnik do pierwszego bajtu tej pamięci. Nie inicjalizuje pamięci.
+    \item \textbf{\texttt{calloc(size\_t num, size\_t size)}} – alokuje pamięć dla tablicy elementów i zeruje przydzieloną pamięć.
+    \item \textbf{\texttt{realloc(void* ptr, size\_t new\_size)}} – zmienia rozmiar wcześniej zaalokowanego bloku pamięci.
+    \item \textbf{\texttt{free(void* ptr)}} – zwalnia zaalokowaną pamięć.
+\end{itemize}
+
+\textbf{Przykład użycia funkcji \texttt{malloc} i \texttt{free}:}
+
+\begin{verbatim}
+#include <stdio.h>
+#include <stdlib.h>
+
+int main() {
+    int *ptr = (int*) malloc(10 * sizeof(int)); // Alokacja tablicy 10 elementów
+    if (ptr == NULL) {
+        printf("Błąd alokacji pamięci\n");
+        return 1;
+    }
+    free(ptr); // Zwolnienie pamięci
+    return 0;
+}
+\end{verbatim}
+
+\subsection{Alokacja i dealokacja pamięci w języku C++}
+W języku C++ dynamiczne zarządzanie pamięcią odbywa się za pomocą operatorów:
+
+\begin{itemize}
+    \item \textbf{\texttt{new}} – alokuje pamięć dla pojedynczego obiektu lub tablicy.
+    \item \textbf{\texttt{delete}} – zwalnia pamięć przydzieloną pojedynczemu obiektowi.
+    \item \textbf{\texttt{delete[]}} – zwalnia pamięć przydzieloną tablicy.
+\end{itemize}
+
+\textbf{Przykład użycia \texttt{new} i \texttt{delete}:}
+
+\begin{verbatim}
+#include <iostream>
+
+int main() {
+    int *ptr = new int(10); // Alokacja pamięci dla pojedynczej liczby
+    delete ptr; // Zwolnienie pamięci
+
+    int *arr = new int[10]; // Alokacja pamięci dla tablicy
+    delete[] arr; // Zwolnienie pamięci tablicy
+    return 0;
+}
+\end{verbatim}
+
+\subsection{Problemy związane z zarządzaniem pamięcią}
+\begin{itemize}
+    \item \textbf{Wycieki pamięci} – występują, gdy zaalokowana pamięć nie zostaje zwolniona.
+    \item \textbf{Dereferencja pustego wskaźnika} – próba użycia wskaźnika o wartości \texttt{NULL} powoduje błąd wykonania.
+    \item \textbf{Uszkodzenie pamięci} – zapisanie wartości poza przydzielonym obszarem może prowadzić do nieprzewidywalnych błędów.
+    \item \textbf{Podwójne zwalnianie pamięci} – zwolnienie tej samej pamięci więcej niż raz może prowadzić do błędów.
+\end{itemize}
+
+\subsection{Mechanizmy zarządzania pamięcią w nowoczesnym C++}
+Nowoczesny C++ (C++11 i nowsze) wprowadza inteligentne wskaźniki, które ułatwiają zarządzanie pamięcią:
+
+\begin{itemize}
+    \item \textbf{\texttt{std::unique\_ptr}} – zarządza pojedynczym obiektem i automatycznie zwalnia pamięć po zakończeniu jego żywotności.
+    \item \textbf{\texttt{std::shared\_ptr}} – zarządza współdzieloną pamięcią i automatycznie zwalnia ją, gdy nie ma już żadnych referencji.
+    \item \textbf{\texttt{std::weak\_ptr}} – słaby wskaźnik używany w celu uniknięcia cykli odniesień.
+\end{itemize}
+
+\textbf{Przykład użycia \texttt{std::unique\_ptr}:}
+
+\begin{verbatim}
+#include <iostream>
+#include <memory>
+
+int main() {
+    std::unique_ptr<int> ptr = std::make_unique<int>(10);
+    std::cout << *ptr << std::endl; // Wyświetla 10
+    return 0; // Pamięć zostaje automatycznie zwolniona
+}
+\end{verbatim}
+
+\subsection{Podsumowanie}
+Zarządzanie pamięcią w językach C i C++ jest kluczowym aspektem programowania. Wymaga ono ostrożności i dbałości o poprawne zwalnianie pamięci. Nowoczesne mechanizmy, takie jak inteligentne wskaźniki w C++, znacząco ułatwiają pracę z pamięcią, redukując ryzyko błędów.

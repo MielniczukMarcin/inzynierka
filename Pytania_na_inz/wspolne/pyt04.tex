@@ -1,0 +1,99 @@
+\section{Podstawowe techniki i strategie projektowania algorytmów}
+
+\subsection{Wprowadzenie}
+Projektowanie algorytmów to proces tworzenia efektywnych metod rozwiązania problemów obliczeniowych. W informatyce wyróżnia się kilka podstawowych strategii, które pozwalają konstruować algorytmy o dobrej wydajności.
+
+Najważniejsze techniki projektowania algorytmów to:
+\begin{itemize}
+    \item \textbf{Zachłanność (greedy algorithms)}
+    \item \textbf{Dziel i zwyciężaj (divide and conquer)}
+    \item \textbf{Programowanie dynamiczne (dynamic programming)}
+    \item \textbf{Algorytmy zachłanne aproksymacyjne}
+    \item \textbf{Przeszukiwanie z nawrotami (backtracking)}
+    \item \textbf{Metoda programowania liniowego}
+    \item \textbf{Heurystyki i algorytmy probabilistyczne}
+\end{itemize}
+
+\subsection{Zachłanność (Greedy Algorithms)}
+Strategia zachłanna polega na podejmowaniu w każdej chwili lokalnie optymalnej decyzji, mając nadzieję, że doprowadzi ona do globalnie optymalnego rozwiązania.
+
+\subsubsection{Cechy algorytmów zachłannych}
+Algorytmy zachłanne działają poprawnie, gdy spełnione są następujące warunki:
+\begin{itemize}
+    \item \textbf{Właściwość optymalnej podstruktury} – optymalne rozwiązanie problemu zawiera optymalne rozwiązania jego podproblemów.
+    \item \textbf{Brak efektu przyszłościowego} – decyzja podjęta na danym etapie nie wpływa na przyszłe decyzje.
+\end{itemize}
+
+\subsubsection{Przykłady algorytmów zachłannych}
+\begin{itemize}
+    \item \textbf{Algorytm Kruskala} – znajdowanie minimalnego drzewa rozpinającego (MST).
+    \item \textbf{Algorytm Dijkstry} – wyznaczanie najkrótszej ścieżki w grafie.
+    \item \textbf{Problem plecakowy (wersja heurystyczna)} – wybór elementów maksymalizujących zysk przy ograniczonej pojemności plecaka.
+\end{itemize}
+
+\subsection{Dziel i zwyciężaj (Divide and Conquer)}
+Technika „dziel i zwyciężaj” polega na podziale problemu na mniejsze podproblemy, rozwiązaniu ich rekurencyjnie i scaleniu wyników.
+
+\subsubsection{Przykłady algorytmów opartych na tej strategii}
+\begin{itemize}
+    \item \textbf{MergeSort} – sortowanie przez scalanie (\( O(n \log n) \)).
+    \item \textbf{QuickSort} – sortowanie szybkie (\( O(n \log n) \)).
+    \item \textbf{Algorytm Karacuby} – szybkie mnożenie dużych liczb (\( O(n^{1.585}) \)).
+\end{itemize}
+
+\subsection{Programowanie dynamiczne (Dynamic Programming)}
+Programowanie dynamiczne jest techniką polegającą na zapamiętywaniu wyników obliczeń podproblemów, aby uniknąć ich powtarzania.
+
+\subsubsection{Cechy programowania dynamicznego}
+\begin{itemize}
+    \item \textbf{Optymalna podstruktura} – rozwiązanie problemu można skonstruować z optymalnych rozwiązań podproblemów.
+    \item \textbf{Nakładanie się podproblemów} – te same podproblemy pojawiają się wielokrotnie.
+\end{itemize}
+
+\subsubsection{Przykłady algorytmów dynamicznych}
+\begin{itemize}
+    \item \textbf{Problem plecakowy (wersja dokładna)} – znajdowanie maksymalnej wartości przedmiotów mieszczących się w plecaku.
+    \item \textbf{Cięcie pręta} – maksymalizacja wartości pręta po jego podziale.
+    \item \textbf{Najdłuższy wspólny podciąg (LCS)} – znajdowanie najdłuższego wspólnego podciągu dwóch ciągów znaków.
+    \item \textbf{Fibonacci} – rekurencyjne wyliczanie liczb Fibonacciego z pamięcią podręczną (\( O(n) \) zamiast \( O(2^n) \)).
+\end{itemize}
+
+\subsection{Przeszukiwanie z nawrotami (Backtracking)}
+Technika ta polega na systematycznym eksplorowaniu wszystkich możliwych rozwiązań poprzez cofanie się, gdy napotka się ślepą uliczkę.
+
+\subsubsection{Przykłady algorytmów wykorzystujących backtracking}
+\begin{itemize}
+    \item \textbf{Problem N-hetmanów} – umieszczenie N hetmanów na szachownicy tak, aby się nie atakowały.
+    \item \textbf{Sudoku} – znajdowanie poprawnego rozwiązania łamigłówki sudoku.
+    \item \textbf{Problem Hamiltona} – znalezienie cyklu Hamiltona w grafie.
+\end{itemize}
+
+\subsection{Metoda programowania liniowego}
+Programowanie liniowe pozwala na optymalizację funkcji celu przy ograniczeniach wyrażonych nierównościami liniowymi. Do jego rozwiązania stosuje się m.in. algorytm sympleksowy.
+
+\subsubsection{Przykłady zastosowań}
+\begin{itemize}
+    \item Optymalizacja kosztów produkcji.
+    \item Maksymalizacja zysków w ograniczonych zasobach.
+\end{itemize}
+
+\subsection{Heurystyki i algorytmy probabilistyczne}
+Niektóre problemy są trudne do rozwiązania w czasie wielomianowym. W takich przypadkach stosuje się podejścia heurystyczne lub probabilistyczne, które nie gwarantują optymalnego rozwiązania, ale znajdują przybliżone wyniki w akceptowalnym czasie.
+
+\subsubsection{Przykłady algorytmów heurystycznych i probabilistycznych}
+\begin{itemize}
+    \item \textbf{Algorytmy genetyczne} – inspirowane teorią ewolucji, stosowane w optymalizacji.
+    \item \textbf{Symulowane wyżarzanie (Simulated Annealing)} – metoda optymalizacji, inspirowana procesem hartowania metali.
+    \item \textbf{Monte Carlo} – algorytmy wykorzystujące losowe próbkowanie do przybliżonych obliczeń.
+\end{itemize}
+
+\subsection{Podsumowanie}
+Każda z przedstawionych strategii ma swoje zastosowania w różnych klasach problemów:
+\begin{itemize}
+    \item \textbf{Algorytmy zachłanne} są szybkie, ale nie zawsze znajdują optymalne rozwiązanie.
+    \item \textbf{Dziel i zwyciężaj} pozwala na rekurencyjne podejście do problemów.
+    \item \textbf{Programowanie dynamiczne} pozwala unikać zbędnych obliczeń poprzez zapamiętywanie wyników.
+    \item \textbf{Backtracking} jest stosowany w problemach wymagających eksploracji przestrzeni rozwiązań.
+    \item \textbf{Heurystyki} są użyteczne w problemach, dla których nie istnieją szybkie algorytmy dokładne.
+\end{itemize}
+Wybór odpowiedniej strategii zależy od natury problemu oraz wymaganej efektywności rozwiązania.

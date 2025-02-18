@@ -1,0 +1,94 @@
+\section{Znane metody oceny jakości modeli klasyfikacyjnych i regresyjnych}
+
+\subsection{Wprowadzenie}
+Ocena jakości modeli predykcyjnych jest kluczowym etapem w analizie danych. Wyróżnia się dwie główne kategorie modeli:
+\begin{itemize}
+    \item \textbf{Modele klasyfikacyjne} – przewidują etykiety klas (np. czy e-mail to spam czy nie).
+    \item \textbf{Modele regresyjne} – przewidują wartości liczbowe (np. cena nieruchomości).
+\end{itemize}
+Ocena jakości modeli opiera się na różnych miarach, które odzwierciedlają skuteczność przewidywań.
+
+\subsection{Metody oceny modeli klasyfikacyjnych}
+
+\subsubsection{1. Macierz pomyłek (Confusion Matrix)}
+Jest to tabela przedstawiająca liczbę poprawnych i błędnych klasyfikacji.
+
+\begin{table}[h]
+    \centering
+    \begin{tabularx}{\textwidth}{|X|X|X|}  % X zamiast c, żeby kolumny się skalowały
+        \hline
+        & \textbf{Klasa rzeczywista: Pozytywna} & \textbf{Klasa rzeczywista: Negatywna} \\
+        \hline
+        \textbf{Przewidziana: Pozytywna} & TP (True Positive) & FP (False Positive) \\
+        \hline
+        \textbf{Przewidziana: Negatywna} & FN (False Negative) & TN (True Negative) \\
+        \hline
+    \end{tabularx}
+    \caption{Macierz pomyłek}
+\end{table}
+
+\subsubsection{2. Miary jakości klasyfikacji}
+\begin{itemize}
+    \item \textbf{Dokładność (Accuracy)}
+    \[
+    Accuracy = \frac{TP + TN}{TP + TN + FP + FN}
+    \]
+    Określa procent poprawnie sklasyfikowanych przypadków.
+
+    \item \textbf{Precyzja (Precision)}
+    \[
+    Precision = \frac{TP}{TP + FP}
+    \]
+    Informuje, jaki procent pozytywnie sklasyfikowanych przykładów rzeczywiście jest pozytywny.
+
+    \item \textbf{Czułość (Recall, Sensitivity)}
+    \[
+    Recall = \frac{TP}{TP + FN}
+    \]
+    Określa, jaki procent rzeczywistych pozytywnych przypadków został poprawnie wykryty.
+
+    \item \textbf{Wartość F1 (F1-score)}
+    \[
+    F1 = 2 \times \frac{Precision \times Recall}{Precision + Recall}
+    \]
+    Średnia harmoniczna precyzji i czułości.
+
+    \item \textbf{Krzywa ROC i AUC (Area Under Curve)}
+    \begin{itemize}
+        \item Krzywa ROC (Receiver Operating Characteristic) przedstawia zależność między czułością a 1-specyficznością.
+        \item AUC (pole pod krzywą ROC) określa skuteczność klasyfikatora – im większa wartość, tym lepszy model.
+    \end{itemize}
+\end{itemize}
+
+\subsection{Metody oceny modeli regresyjnych}
+
+\subsubsection{1. Średni błąd absolutny (Mean Absolute Error, MAE)}
+\[
+MAE = \frac{1}{n} \sum_{i=1}^{n} | y_i - \hat{y}_i |
+\]
+Określa średnią wartość błędu między rzeczywistymi a przewidywanymi wartościami.
+
+\subsubsection{2. Średni błąd kwadratowy (Mean Squared Error, MSE)}
+\[
+MSE = \frac{1}{n} \sum_{i=1}^{n} (y_i - \hat{y}_i)^2
+\]
+Wartości większe są bardziej karane, przez co bardziej uwzględnia duże błędy.
+
+\subsubsection{3. Pierwiastek średniego błędu kwadratowego (Root Mean Squared Error, RMSE)}
+\[
+RMSE = \sqrt{MSE}
+\]
+Jest to miara podobna do MSE, ale zachowuje tę samą jednostkę, co wartości przewidywane.
+
+\subsubsection{4. Współczynnik determinacji (R-squared, \( R^2 \))}
+\[
+R^2 = 1 - \frac{\sum (y_i - \hat{y}_i)^2}{\sum (y_i - \bar{y})^2}
+\]
+Określa, jaka część wariancji zmiennej zależnej jest wyjaśniona przez model.
+
+\subsection{Podsumowanie}
+\begin{itemize}
+    \item Modele klasyfikacyjne oceniane są za pomocą dokładności, precyzji, czułości, wartości F1 oraz krzywej ROC.
+    \item Modele regresyjne ocenia się poprzez MAE, MSE, RMSE oraz współczynnik determinacji \( R^2 \).
+    \item Wybór odpowiedniej metryki zależy od charakteru problemu oraz konsekwencji błędów w predykcji.
+\end{itemize}

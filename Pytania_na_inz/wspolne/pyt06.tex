@@ -1,0 +1,132 @@
+\section{Podstawowe cechy języka programowania, kwalifikujące do zaliczenia do grupy języków zorientowanych obiektowo}
+
+\subsection{Wprowadzenie}
+Programowanie obiektowe (ang. \textit{Object-Oriented Programming, OOP}) to paradygmat programowania, który organizuje kod wokół obiektów – jednostek łączących dane oraz metody operujące na tych danych. Język programowania można uznać za obiektowy, jeśli spełnia pewne kluczowe cechy i zasady.
+
+\subsection{Podstawowe cechy języków obiektowych}
+Język programowania jest klasyfikowany jako obiektowy, jeśli wspiera następujące koncepcje:
+
+\subsubsection{1. Abstrakcja (\textit{Abstraction})}
+Abstrakcja polega na ukrywaniu szczegółów implementacji i eksponowaniu tylko istotnych właściwości obiektów. Dzięki temu użytkownik korzysta z interfejsu klasy, nie znając jej wewnętrznych mechanizmów.
+
+\textbf{Przykład w C++}:
+\begin{verbatim}
+class Samochod {
+private:
+    string marka;
+public:
+    void ustawMarke(string m) { marka = m; }
+    string pobierzMarke() { return marka; }
+};
+\end{verbatim}
+
+\subsubsection{2. Hermetyzacja (\textit{Encapsulation})}
+Hermetyzacja oznacza ograniczenie dostępu do wewnętrznych danych obiektu. Osiąga się to poprzez modyfikatory dostępu (\texttt{private}, \texttt{protected}, \texttt{public}) i ukrycie zmiennych wewnątrz klasy.
+
+\textbf{Zalety hermetyzacji:}
+\begin{itemize}
+    \item Ochrona przed nieautoryzowanym dostępem do danych.
+    \item Zapewnienie integralności danych poprzez kontrolowany dostęp.
+\end{itemize}
+
+\subsubsection{3. Dziedziczenie (\textit{Inheritance})}
+Dziedziczenie pozwala na tworzenie nowych klas na podstawie już istniejących. Klasa pochodna (\textit{subclass}) dziedziczy cechy i metody klasy bazowej (\textit{superclass}), co pozwala na ponowne użycie kodu.
+
+\textbf{Przykład w C++}:
+\begin{verbatim}
+class Pojazd {
+public:
+    void info() { cout << "To jest pojazd"; }
+};
+
+class Samochod : public Pojazd {
+};
+\end{verbatim}
+Tutaj \texttt{Samochod} dziedziczy metodę \texttt{info()} z klasy \texttt{Pojazd}.
+
+\subsubsection{4. Polimorfizm (\textit{Polymorphism})}
+Polimorfizm umożliwia definiowanie wielu wersji tej samej metody, działających na różnych typach danych. Wyróżnia się:
+\begin{itemize}
+    \item \textbf{Polimorfizm statyczny} (przeciążanie funkcji i operatorów).
+    \item \textbf{Polimorfizm dynamiczny} (metody wirtualne i nadpisywanie metod).
+\end{itemize}
+
+\textbf{Przykład polimorfizmu dynamicznego w C++}:
+\begin{verbatim}
+class Pojazd {
+public:
+    virtual void dzwiek() { cout << "Ogólny dźwięk pojazdu"; }
+};
+
+class Samochod : public Pojazd {
+public:
+    void dzwiek() override { cout << "Dźwięk silnika samochodu"; }
+};
+\end{verbatim}
+
+\subsection{Dodatkowe cechy języków obiektowych}
+Oprócz czterech podstawowych filarów OOP, języki obiektowe często wspierają również inne mechanizmy:
+
+\subsubsection{1. Klasy i obiekty}
+Klasy są szablonami do tworzenia obiektów, a obiekty są instancjami klas.
+
+\textbf{Przykład w C++}:
+\begin{verbatim}
+class Osoba {
+public:
+    string imie;
+    int wiek;
+};
+
+int main() {
+    Osoba o1;
+    o1.imie = "Jan";
+    o1.wiek = 30;
+}
+\end{verbatim}
+
+\subsubsection{2. Konstruktor i destruktor}
+Konstruktor to specjalna metoda wywoływana podczas tworzenia obiektu, a destruktor – podczas usuwania obiektu.
+
+\begin{verbatim}
+class Samochod {
+public:
+    Samochod() { cout << "Tworzę samochód"; }
+    ~Samochod() { cout << "Usuwam samochód"; }
+};
+\end{verbatim}
+
+\subsubsection{3. Interfejsy i klasy abstrakcyjne}
+Interfejsy i klasy abstrakcyjne umożliwiają definiowanie wspólnych metod dla różnych klas.
+
+\textbf{Przykład w C++}:
+\begin{verbatim}
+class Figura {
+public:
+    virtual void rysuj() = 0; // Klasa abstrakcyjna
+};
+\end{verbatim}
+
+\subsection{Znaczenie obiektowego podejścia w projektowaniu oprogramowania}
+Programowanie obiektowe ma kluczowe znaczenie w projektowaniu oprogramowania:
+\begin{itemize}
+    \item \textbf{Reużywalność kodu} – dzięki dziedziczeniu możliwe jest ponowne użycie już istniejącego kodu.
+    \item \textbf{Łatwiejsza konserwacja} – hermetyzacja zapewnia lepszą kontrolę nad modyfikacjami kodu.
+    \item \textbf{Lepsza organizacja kodu} – klasy i obiekty pozwalają na logiczne grupowanie danych i metod.
+    \item \textbf{Łatwiejsza skalowalność} – programowanie obiektowe umożliwia łatwe dodawanie nowych funkcjonalności.
+\end{itemize}
+
+\subsection{Przykłady języków zorientowanych obiektowo}
+\begin{itemize}
+    \item \textbf{C++} – język wieloparadygmatowy, umożliwiający zarówno programowanie strukturalne, jak i obiektowe.
+    \item \textbf{Java} – język w pełni obiektowy, gdzie każda klasa dziedziczy po klasie nadrzędnej \texttt{Object}.
+    \item \textbf{Python} – dynamiczny język z pełnym wsparciem dla programowania obiektowego.
+    \item \textbf{C\#} – język silnie związany z platformą .NET, wspierający zarówno OOP, jak i programowanie funkcyjne.
+\end{itemize}
+
+\subsection{Podsumowanie}
+\begin{itemize}
+    \item Języki obiektowe charakteryzują się abstrakcją, hermetyzacją, dziedziczeniem i polimorfizmem.
+    \item Obiektowe podejście ułatwia organizację kodu, reużywalność i konserwację.
+    \item Do najpopularniejszych języków OOP należą C++, Java, Python i C\#.
+\end{itemize}

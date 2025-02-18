@@ -1,0 +1,97 @@
+\section{Mechanizmy indeksowania w relacyjnych bazach danych}
+
+\subsection{Wprowadzenie}
+Indeksowanie w relacyjnych bazach danych to technika optymalizacyjna, która przyspiesza wyszukiwanie, sortowanie oraz filtrowanie danych. Indeksy są strukturami danych, które umożliwiają szybki dostęp do wierszy tabeli bez konieczności przeszukiwania całej tabeli.
+
+\subsection{Rodzaje indeksów}
+
+\subsubsection{1. Indeks klastrowany (Clustered Index)}
+W indeksie klastrowanym dane w tabeli są fizycznie przechowywane w kolejności określonej przez indeks. Każda tabela może mieć tylko jeden indeks klastrowany.
+
+\textbf{Zalety:}
+\begin{itemize}
+    \item Przyspiesza operacje wyszukiwania i sortowania według klucza indeksu.
+    \item Wydajniejszy dla zapytań, które zwracają zakresy danych.
+\end{itemize}
+
+\textbf{Wady:}
+\begin{itemize}
+    \item Wolniejsza operacja wstawiania i aktualizacji, ponieważ może wymagać reorganizacji danych.
+    \item Może zajmować więcej miejsca na dysku.
+\end{itemize}
+
+\textbf{Przykład w SQL:}
+\begin{verbatim}
+CREATE CLUSTERED INDEX idx_klastrowany ON Pracownicy (Nazwisko);
+\end{verbatim}
+
+\subsubsection{2. Indeks nieklastrowany (Non-clustered Index)}
+Indeks nieklastrowany przechowuje wskaźniki do rzeczywistych danych, nie zmieniając ich fizycznego rozmieszczenia.
+
+\textbf{Zalety:}
+\begin{itemize}
+    \item Można utworzyć wiele indeksów nieklastrowanych dla jednej tabeli.
+    \item Przyspiesza wyszukiwanie według wartości, które nie są kluczami głównymi.
+\end{itemize}
+
+\textbf{Wady:}
+\begin{itemize}
+    \item Może spowolnić operacje \texttt{INSERT}, \texttt{UPDATE} i \texttt{DELETE}.
+    \item Każdy indeks dodatkowo zużywa przestrzeń dyskową.
+\end{itemize}
+
+\textbf{Przykład w SQL:}
+\begin{verbatim}
+CREATE INDEX idx_nieklastrowany ON Pracownicy (Stanowisko);
+\end{verbatim}
+
+\subsubsection{3. Indeks wielokolumnowy (Composite Index)}
+Jest to indeks tworzony na więcej niż jednej kolumnie, co przyspiesza wyszukiwanie połączeń między danymi.
+
+\textbf{Zalety:}
+\begin{itemize}
+    \item Efektywność w zapytaniach, które filtrują dane według kilku kolumn.
+\end{itemize}
+
+\textbf{Wady:}
+\begin{itemize}
+    \item Zapytania muszą używać pierwszej kolumny indeksu, aby indeks był efektywny.
+\end{itemize}
+
+\textbf{Przykład w SQL:}
+\begin{verbatim}
+CREATE INDEX idx_wielokolumnowy ON Pracownicy (Nazwisko, Imie);
+\end{verbatim}
+
+\subsubsection{4. Indeks unikalny (Unique Index)}
+Indeks, który zapewnia unikalność wartości w danej kolumnie.
+
+\textbf{Zalety:}
+\begin{itemize}
+    \item Zapobiega duplikacji danych.
+\end{itemize}
+
+\textbf{Przykład w SQL:}
+\begin{verbatim}
+CREATE UNIQUE INDEX idx_unikalny ON Pracownicy (Email);
+\end{verbatim}
+
+\subsubsection{5. Indeks pełnotekstowy (Full-text Index)}
+Stosowany do wyszukiwania w dużych zbiorach tekstowych.
+
+\textbf{Zastosowanie:}
+\begin{itemize}
+    \item Wyszukiwanie pełnotekstowe w bazach danych (np. w dokumentach).
+\end{itemize}
+
+\textbf{Przykład w SQL Server:}
+\begin{verbatim}
+CREATE FULLTEXT INDEX ON Dokumenty (Tresc);
+\end{verbatim}
+
+\subsection{Podsumowanie}
+\begin{itemize}
+    \item Indeksy przyspieszają wyszukiwanie danych, ale mogą zwiększyć czas operacji modyfikacji.
+    \item Istnieją indeksy klastrowane, nieklastrowane, wielokolumnowe, unikalne i pełnotekstowe.
+    \item Wybór odpowiedniego indeksu zależy od charakterystyki danych i częstości wykonywania operacji.
+\end{itemize}

@@ -1,0 +1,133 @@
+\section{Metody zwielokrotnienia kanałów transmisyjnych oraz media transmisyjne}
+
+\subsection{Wprowadzenie}
+Zwielokrotnienie kanałów transmisyjnych to technika umożliwiająca jednoczesne przesyłanie wielu sygnałów przez jedno medium transmisyjne. Pozwala to na efektywne wykorzystanie dostępnej przepustowości oraz zwiększenie liczby użytkowników korzystających z tej samej infrastruktury sieciowej.
+
+\subsection{Metody zwielokrotnienia kanałów transmisyjnych}
+
+\subsubsection{1. Zwielokrotnienie częstotliwościowe (FDM – Frequency Division Multiplexing)}
+FDM polega na podziale pasma częstotliwościowego medium transmisyjnego na wiele niepokrywających się zakresów, z których każdy jest wykorzystywany do przesyłania innego sygnału.
+
+\textbf{Zastosowania:}
+\begin{itemize}
+    \item Radio i telewizja analogowa (np. kanały radiowe na różnych częstotliwościach).
+    \item Systemy telefonii analogowej.
+    \item Sieci światłowodowe (technologia WDM).
+\end{itemize}
+
+\textbf{Zalety:}
+\begin{itemize}
+    \item Umożliwia jednoczesną transmisję wielu sygnałów.
+    \item Brak konieczności synchronizacji czasowej.
+\end{itemize}
+
+\textbf{Wady:}
+\begin{itemize}
+    \item Może prowadzić do zakłóceń międzykanałowych (interferencja sąsiednich pasm).
+    \item Wymaga zastosowania filtrów pasmowych.
+\end{itemize}
+
+\subsubsection{2. Zwielokrotnienie czasowe (TDM – Time Division Multiplexing)}
+TDM przydziela każdemu sygnałowi dostęp do kanału transmisyjnego na określony przedział czasu (slot czasowy).
+
+\textbf{Zastosowania:}
+\begin{itemize}
+    \item Telefonia cyfrowa (np. systemy ISDN, E1/T1).
+    \item Sieci komputerowe (np. technologia SONET/SDH).
+\end{itemize}
+
+\textbf{Zalety:}
+\begin{itemize}
+    \item Wysoka efektywność wykorzystania pasma.
+    \item Brak interferencji między sygnałami.
+\end{itemize}
+
+\textbf{Wady:}
+\begin{itemize}
+    \item Wymaga precyzyjnej synchronizacji.
+    \item Opóźnienia w transmisji pakietów.
+\end{itemize}
+
+\subsubsection{3. Zwielokrotnienie kodowe (CDM – Code Division Multiplexing)}
+CDM polega na przypisaniu każdemu użytkownikowi unikalnego kodu, dzięki czemu wiele sygnałów może być przesyłanych równocześnie w tym samym paśmie częstotliwościowym.
+
+\textbf{Zastosowania:}
+\begin{itemize}
+    \item Sieci telefonii komórkowej (np. UMTS, CDMA).
+    \item Systemy satelitarne.
+\end{itemize}
+
+\textbf{Zalety:}
+\begin{itemize}
+    \item Wysoka odporność na zakłócenia.
+    \item Możliwość dynamicznego przydzielania zasobów.
+\end{itemize}
+
+\textbf{Wady:}
+\begin{itemize}
+    \item Skomplikowane techniki kodowania i dekodowania.
+    \item Większe zapotrzebowanie na moc obliczeniową.
+\end{itemize}
+
+\subsubsection{4. Zwielokrotnienie przestrzenne (SDM – Space Division Multiplexing)}
+SDM wykorzystuje fizyczną separację kanałów transmisyjnych, np. poprzez zastosowanie wielu przewodów lub anten.
+
+\textbf{Zastosowania:}
+\begin{itemize}
+    \item Światłowody wielordzeniowe.
+    \item Systemy MIMO (Multiple Input Multiple Output) w sieciach 4G i 5G.
+\end{itemize}
+
+\textbf{Zalety:}
+\begin{itemize}
+    \item Możliwość znacznego zwiększenia przepustowości.
+    \item Brak interferencji między kanałami.
+\end{itemize}
+
+\textbf{Wady:}
+\begin{itemize}
+    \item Wymaga większej liczby urządzeń nadawczo-odbiorczych.
+\end{itemize}
+
+\subsubsection{5. Zwielokrotnienie długości fali (WDM – Wavelength Division Multiplexing)}
+WDM stosowane w światłowodach pozwala na przesyłanie wielu sygnałów optycznych o różnych długościach fali w tym samym medium transmisyjnym.
+
+\textbf{Zastosowania:}
+\begin{itemize}
+    \item Sieci światłowodowe dalekiego zasięgu (np. DWDM – Dense WDM).
+\end{itemize}
+
+\textbf{Zalety:}
+\begin{itemize}
+    \item Ogromna przepustowość transmisji.
+    \item Niski poziom zakłóceń.
+\end{itemize}
+
+\textbf{Wady:}
+\begin{itemize}
+    \item Wysoki koszt infrastruktury.
+\end{itemize}
+
+\subsection{Media transmisyjne}
+Media transmisyjne dzielą się na przewodowe i bezprzewodowe.
+
+\subsubsection{1. Media przewodowe}
+\begin{itemize}
+    \item \textbf{Przewody miedziane} – stosowane w sieciach telefonicznych i Ethernet (skrętka UTP/STP).
+    \item \textbf{Światłowody} – wykorzystujące fale świetlne do transmisji, zapewniające bardzo dużą przepustowość.
+    \item \textbf{Kable koncentryczne} – stosowane w telewizji kablowej i starszych sieciach Ethernet.
+\end{itemize}
+
+\subsubsection{2. Media bezprzewodowe}
+\begin{itemize}
+    \item \textbf{Fale radiowe} – stosowane w sieciach Wi-Fi, Bluetooth i telefonii komórkowej.
+    \item \textbf{Podczerwień} – wykorzystywana w pilotach zdalnego sterowania.
+    \item \textbf{Fale mikrofalowe} – stosowane w komunikacji satelitarnej i punkt-punkt.
+\end{itemize}
+
+\subsection{Podsumowanie}
+\begin{itemize}
+    \item Istnieje wiele metod zwielokrotnienia kanałów transmisyjnych, w tym FDM, TDM, CDM, SDM i WDM.
+    \item Każda z metod ma swoje zalety i ograniczenia, zależne od zastosowania.
+    \item Media transmisyjne mogą być przewodowe (miedź, światłowody) lub bezprzewodowe (fale radiowe, mikrofale).
+\end{itemize}

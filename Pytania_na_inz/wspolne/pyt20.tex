@@ -1,0 +1,53 @@
+\section{Problem przekleństwa wymiarowości}
+
+\subsection{Wprowadzenie}
+Przekleństwo wymiarowości (ang. \textit{curse of dimensionality}) to zjawisko, w którym wzrost liczby wymiarów przestrzeni cech prowadzi do istotnych problemów obliczeniowych, analitycznych oraz modelowania danych. Problemy te występują w uczeniu maszynowym, statystyce, analizie danych i eksploracji dużych zbiorów danych.
+
+\subsection{Przyczyny przekleństwa wymiarowości}
+\begin{itemize}
+    \item \textbf{Wzrost objętości przestrzeni} – im więcej wymiarów, tym większa przestrzeń do przeszukiwania.
+    \item \textbf{Rozrzedzenie danych} – w wysokiej wymiarowości dane stają się rzadkie, co utrudnia efektywne modelowanie.
+    \item \textbf{Problemy z odległościami} – wymiary wpływają na metryki odległości, co powoduje, że punkty stają się bardziej równomiernie rozmieszczone.
+    \item \textbf{Wzrost złożoności obliczeniowej} – operacje na danych wysokiej wymiarowości wymagają większych zasobów obliczeniowych.
+\end{itemize}
+
+\subsection{Konsekwencje przekleństwa wymiarowości}
+\subsubsection{1. Problemy w klasyfikacji i klasteryzacji}
+Wysoka wymiarowość może prowadzić do sytuacji, w której klasyfikatory i algorytmy klasteryzacji tracą skuteczność, ponieważ różnice między punktami stają się mniej wyraźne.
+
+\subsubsection{2. Wzrost liczby danych wymaganych do efektywnego modelowania}
+Dla wysokiej wymiarowości konieczna jest większa liczba próbek, aby uniknąć przeuczenia (ang. \textit{overfitting}).
+
+\subsubsection{3. Problemy w analizie podobieństwa}
+W metrykach takich jak odległość euklidesowa większość punktów może znajdować się w podobnych odległościach, co utrudnia identyfikację najbliższych sąsiadów.
+
+\subsection{Metody radzenia sobie z przekleństwem wymiarowości}
+
+\subsubsection{1. Redukcja wymiarowości}
+Redukcja liczby wymiarów może poprawić efektywność algorytmów i ich interpretowalność.
+
+\textbf{Przykłady metod:}
+\begin{itemize}
+    \item \textbf{Główne składowe (PCA)} – transformacja danych w nową przestrzeń o mniejszej liczbie wymiarów.
+    \item \textbf{Analiza składowych niezależnych (ICA)} – rozkład danych na komponenty niezależne statystycznie.
+    \item \textbf{t-SNE, UMAP} – metody redukcji wymiarowości do wizualizacji danych.
+\end{itemize}
+
+\subsubsection{2. Wybór cech (Feature Selection)}
+Selekcja najistotniejszych cech pozwala zmniejszyć wymiarowość bez utraty informacji.
+
+\textbf{Metody:}
+\begin{itemize}
+    \item \textbf{Filtry} – analiza cech na podstawie korelacji, testów statystycznych.
+    \item \textbf{Metody osadzone} – np. LASSO, które usuwa mniej istotne cechy podczas uczenia modelu.
+\end{itemize}
+
+\subsubsection{3. Użycie algorytmów odpornych na wysoką wymiarowość}
+Niektóre algorytmy, np. drzewa decyzyjne czy metody oparte na rzadkich reprezentacjach, mogą lepiej działać w wysokiej wymiarowości.
+
+\subsection{Podsumowanie}
+\begin{itemize}
+    \item Przekleństwo wymiarowości utrudnia analizę i modelowanie danych, prowadząc do problemów w klasyfikacji, klasteryzacji i eksploracji danych.
+    \item Wysoka wymiarowość zwiększa wymagania obliczeniowe i prowadzi do rozrzedzenia danych.
+    \item Metody takie jak redukcja wymiarowości (PCA, t-SNE), selekcja cech i dobór odpowiednich algorytmów pomagają radzić sobie z tym problemem.
+\end{itemize}

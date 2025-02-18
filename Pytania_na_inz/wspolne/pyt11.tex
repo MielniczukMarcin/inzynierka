@@ -1,0 +1,78 @@
+\section{Tablice mieszające}
+
+\subsection{Wprowadzenie}
+Tablice mieszające (ang. \textit{hash tables}) to struktury danych, które umożliwiają szybkie wyszukiwanie, wstawianie i usuwanie elementów. Wykorzystują funkcję mieszającą (\textit{hash function}), która przekształca klucz na indeks w tablicy, umożliwiając efektywne przechowywanie i dostęp do danych.
+
+\subsection{Zasada działania}
+Tablica mieszająca działa w oparciu o funkcję mieszającą \( h(k) \), która przekształca klucz \( k \) w indeks tablicy:
+\[
+h(k) = k \mod m
+\]
+gdzie \( m \) to rozmiar tablicy mieszającej.
+
+\textbf{Przykład:} Jeśli \( m = 10 \) i klucz \( k = 27 \), to:
+\[
+h(27) = 27 \mod 10 = 7.
+\]
+Oznacza to, że element o kluczu \( 27 \) zostanie zapisany w komórce \( 7 \).
+
+\subsection{Funkcje mieszające}
+Dobra funkcja mieszająca powinna:
+\begin{itemize}
+    \item generować równomierny rozkład wartości,
+    \item być szybka do obliczenia,
+    \item minimalizować liczbę kolizji.
+\end{itemize}
+
+Przykładowe funkcje mieszające:
+\begin{itemize}
+    \item Funkcja resztowa: \( h(k) = k \mod m \).
+    \item Mnożeniowa: \( h(k) = \lfloor m (k A \mod 1) \rfloor \), gdzie \( A \) to stała (np. \( A \approx 0.618 \)).
+    \item Kryptograficzne funkcje mieszające: MD5, SHA-256 (stosowane w systemach bezpieczeństwa).
+\end{itemize}
+
+\subsection{Kolizje i ich rozwiązywanie}
+Kolizja występuje, gdy dwa różne klucze generują ten sam indeks w tablicy mieszającej. Można je rozwiązać na kilka sposobów:
+
+\subsubsection{1. Łańcuchowanie (\textit{Chaining})}
+Każda komórka tablicy zawiera listę elementów o tym samym indeksie mieszania.
+\begin{verbatim}
+class HashTable {
+    vector<list<int>> table;
+public:
+    void insert(int key) {
+        int index = key % table.size();
+        table[index].push_back(key);
+    }
+};
+\end{verbatim}
+
+\subsubsection{2. Otwarta adresacja (\textit{Open Addressing})}
+Gdy kolizja wystąpi, szukamy innego miejsca w tablicy.
+
+\textbf{Przykładowe strategie rozwiązywania kolizji:}
+\begin{itemize}
+    \item \textbf{Liniowe próbkowanie}: \( h(k, i) = (h(k) + i) \mod m \).
+    \item \textbf{Kwadratowe próbkowanie}: \( h(k, i) = (h(k) + i^2) \mod m \).
+    \item \textbf{Podwójne mieszanie}: \( h(k, i) = (h_1(k) + i \cdot h_2(k)) \mod m \).
+\end{itemize}
+
+\subsection{Złożoność czasowa}
+\begin{itemize}
+    \item \textbf{Średni przypadek}: \( O(1) \) dla wstawiania, wyszukiwania i usuwania.
+    \item \textbf{Najgorszy przypadek}: \( O(n) \), gdy wszystkie klucze trafiają do jednej komórki (np. przy złej funkcji mieszającej).
+\end{itemize}
+
+\subsection{Zastosowania tablic mieszających}
+\begin{itemize}
+    \item Implementacja słowników i map (\texttt{std::unordered\_map} w C++).
+    \item Buforowanie danych (np. DNS cache).
+    \item Algorytmy kryptograficzne i struktury danych do sprawdzania duplikatów.
+\end{itemize}
+
+\subsection{Podsumowanie}
+\begin{itemize}
+    \item Tablice mieszające to wydajna struktura danych umożliwiająca szybkie operacje.
+    \item Odpowiednia funkcja mieszająca i strategia obsługi kolizji są kluczowe dla wydajności.
+    \item Są szeroko stosowane w bazach danych, kompilatorach i systemach operacyjnych.
+\end{itemize}

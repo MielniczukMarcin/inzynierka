@@ -1,0 +1,123 @@
+\section{Główne modele procesu wytwarzania oprogramowania}
+
+\subsection{Wprowadzenie}
+Model procesu wytwarzania oprogramowania określa metodykę organizacji prac nad projektem informatycznym. Jego celem jest zapewnienie wysokiej jakości produktu, efektywnego zarządzania zasobami oraz minimalizacji ryzyka błędów i opóźnień.
+
+\subsection{Główne modele wytwarzania oprogramowania}
+
+\subsubsection{1. Model kaskadowy (\textit{Waterfall})}
+Model kaskadowy to najstarszy i najbardziej klasyczny model wytwarzania oprogramowania, w którym proces przebiega liniowo, etap po etapie.
+
+\textbf{Etapy modelu kaskadowego:}
+\begin{enumerate}
+    \item Analiza wymagań.
+    \item Projektowanie systemu.
+    \item Implementacja.
+    \item Testowanie.
+    \item Wdrożenie.
+    \item Utrzymanie.
+\end{enumerate}
+
+\textbf{Zalety:}
+\begin{itemize}
+    \item Jasna struktura i dobrze zdefiniowane etapy.
+    \item Łatwość zarządzania projektem.
+    \item Dobra dokumentacja techniczna.
+\end{itemize}
+
+\textbf{Wady:}
+\begin{itemize}
+    \item Brak elastyczności – trudność wprowadzania zmian na późniejszych etapach.
+    \item Wysokie ryzyko wykrycia błędów dopiero na etapie testowania.
+    \item Długi czas realizacji przed dostarczeniem działającego produktu.
+\end{itemize}
+
+\subsubsection{2. Model V}
+Jest rozszerzeniem modelu kaskadowego, w którym do każdego etapu rozwoju przypisany jest odpowiedni etap testowania.
+
+\textbf{Etapy modelu V:}
+\begin{itemize}
+    \item \textbf{Faza projektowania:} analiza wymagań, projekt systemu, projektowanie modułów.
+    \item \textbf{Faza implementacji:} kodowanie.
+    \item \textbf{Faza testowania:} testy jednostkowe, integracyjne, systemowe i akceptacyjne.
+\end{itemize}
+
+\textbf{Zalety:}
+\begin{itemize}
+    \item Testowanie jest zintegrowane z każdym etapem rozwoju.
+    \item Wczesne wykrywanie błędów.
+\end{itemize}
+
+\textbf{Wady:}
+\begin{itemize}
+    \item Nadal jest modelem sztywnym, utrudniającym wprowadzanie zmian.
+    \item Wymaga dużej ilości dokumentacji.
+\end{itemize}
+
+\subsubsection{3. Model iteracyjny}
+W modelu iteracyjnym rozwój oprogramowania odbywa się w cyklach (iteracjach), w których dodawane są kolejne funkcjonalności.
+
+\textbf{Zalety:}
+\begin{itemize}
+    \item Możliwość wczesnego dostarczenia działających fragmentów systemu.
+    \item Lepsza adaptacja do zmieniających się wymagań.
+\end{itemize}
+
+\textbf{Wady:}
+\begin{itemize}
+    \item Potrzeba częstej komunikacji z klientem.
+    \item Wymaga dobrej organizacji pracy.
+\end{itemize}
+
+\subsubsection{4. Model przyrostowy (\textit{Incremental})}
+W modelu przyrostowym system jest budowany stopniowo poprzez dodawanie kolejnych modułów.
+
+\textbf{Zalety:}
+\begin{itemize}
+    \item Klient otrzymuje działające wersje systemu na wczesnych etapach.
+    \item Mniejsze ryzyko błędów projektowych.
+\end{itemize}
+
+\textbf{Wady:}
+\begin{itemize}
+    \item Może prowadzić do problemów z integracją modułów.
+    \item Wymaga dobrego zarządzania wersjami.
+\end{itemize}
+
+\subsubsection{5. Model spiralny}
+Łączy elementy modelu kaskadowego i iteracyjnego, koncentrując się na minimalizacji ryzyka poprzez wielokrotne cykle planowania, projektowania, implementacji i testowania.
+
+\textbf{Zalety:}
+\begin{itemize}
+    \item Dobre zarządzanie ryzykiem.
+    \item Elastyczność w dostosowywaniu wymagań.
+\end{itemize}
+
+\textbf{Wady:}
+\begin{itemize}
+    \item Złożoność zarządzania procesem.
+    \item Wysoki koszt realizacji.
+\end{itemize}
+
+\subsubsection{6. Metodyki zwinne (\textit{Agile})}
+Zwinne podejścia do wytwarzania oprogramowania, takie jak \textbf{Scrum} czy \textbf{Kanban}, opierają się na iteracyjnym podejściu, ścisłej współpracy z klientem i szybkim dostarczaniu wartości.
+
+\textbf{Zalety:}
+\begin{itemize}
+    \item Duża elastyczność w dostosowywaniu projektu do zmieniających się wymagań.
+    \item Wczesne dostarczanie wartościowych funkcjonalności.
+\end{itemize}
+
+\textbf{Wady:}
+\begin{itemize}
+    \item Wymaga intensywnej komunikacji i zaangażowania zespołu.
+    \item Trudności w planowaniu długoterminowym.
+\end{itemize}
+
+\subsection{Podsumowanie}
+\begin{itemize}
+    \item Model kaskadowy i model V są dobrze ustrukturyzowane, ale mało elastyczne.
+    \item Modele iteracyjne i przyrostowe umożliwiają stopniowe wdrażanie funkcjonalności.
+    \item Model spiralny zapewnia dobrą kontrolę ryzyka.
+    \item Metodyki Agile umożliwiają szybkie reagowanie na zmiany i ścisłą współpracę z klientem.
+\end{itemize}

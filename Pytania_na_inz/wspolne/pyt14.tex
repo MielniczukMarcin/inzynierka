@@ -1,0 +1,82 @@
+\section{Charakterystyka wybranego modelu oświetlenia oraz jego komponentów}
+
+\subsection{Wprowadzenie}
+Modele oświetlenia w grafice komputerowej symulują sposób, w jaki światło oddziałuje z obiektami, aby uzyskać realistyczny wygląd sceny. Oświetlenie wpływa na percepcję kształtu, głębi i materiałów obiektów. Istnieje wiele modeli oświetlenia, jednak jednym z najczęściej stosowanych w grafice trójwymiarowej jest \textbf{model Phonga}.
+
+\subsection{Model oświetlenia Phonga}
+Model Phonga jest empirycznym modelem oświetlenia, który opisuje sposób, w jaki światło odbija się od powierzchni. Składa się z trzech głównych komponentów:
+\begin{equation}
+I = I_a + I_d + I_s
+\end{equation}
+gdzie:
+\begin{itemize}
+    \item \( I_a \) – składnik oświetlenia otoczenia (ambient),
+    \item \( I_d \) – składnik oświetlenia rozproszonego (diffuse),
+    \item \( I_s \) – składnik oświetlenia odbitego (specular).
+\end{itemize}
+
+\subsubsection{1. Składnik oświetlenia otoczenia (\textit{Ambient Light})}
+Jest to globalny składnik światła, który symuluje efekt światła odbitego od wielu powierzchni. Modeluje oświetlenie w obszarach, do których bezpośrednie światło nie dociera.
+
+\textbf{Wzór:}
+\begin{equation}
+I_a = k_a I_L
+\end{equation}
+gdzie:
+\begin{itemize}
+    \item \( k_a \) – współczynnik odbicia światła otoczenia,
+    \item \( I_L \) – natężenie światła otoczenia.
+\end{itemize}
+
+\subsubsection{2. Składnik oświetlenia rozproszonego (\textit{Diffuse Light})}
+Modeluje rozpraszanie światła na powierzchni obiektu. Natężenie światła zależy od kąta padania światła na powierzchnię i opisuje efekt, w którym powierzchnie ustawione prostopadle do kierunku światła są jaśniejsze.
+
+\textbf{Wzór:}
+\begin{equation}
+I_d = k_d I_L \max(0, \vec{N} \cdot \vec{L})
+\end{equation}
+gdzie:
+\begin{itemize}
+    \item \( k_d \) – współczynnik odbicia światła rozproszonego,
+    \item \( \vec{N} \) – wektor normalny do powierzchni,
+    \item \( \vec{L} \) – wektor kierunku światła.
+\end{itemize}
+
+\subsubsection{3. Składnik oświetlenia odbitego (\textit{Specular Light})}
+Symuluje efekt połysku i refleksów świetlnych na powierzchniach błyszczących. Wartość ta zależy od kąta między wektorem odbicia światła a kierunkiem patrzenia.
+
+\textbf{Wzór:}
+\begin{equation}
+I_s = k_s I_L \max(0, \vec{R} \cdot \vec{V})^n
+\end{equation}
+gdzie:
+\begin{itemize}
+    \item \( k_s \) – współczynnik odbicia światła zwierciadlanego,
+    \item \( \vec{R} \) – wektor odbitego światła,
+    \item \( \vec{V} \) – wektor kierunku obserwacji,
+    \item \( n \) – współczynnik połysku (im wyższy, tym mniejsze i bardziej skoncentrowane refleksy).
+\end{itemize}
+
+\subsection{Rodzaje źródeł światła}
+W modelu Phonga mogą występować różne typy źródeł światła:
+\begin{itemize}
+    \item \textbf{Światło punktowe} – emituje światło we wszystkich kierunkach z jednego punktu.
+    \item \textbf{Światło kierunkowe} – symuluje światło pochodzące z bardzo odległego źródła (np. słońca), promienie światła są równoległe.
+    \item \textbf{Światło reflektorowe} – podobne do światła punktowego, ale ograniczone do stożka.
+\end{itemize}
+
+\subsection{Zalety modelu Phonga}
+\begin{itemize}
+    \item Prosta i szybka implementacja w porównaniu do bardziej zaawansowanych metod.
+    \item Dobrze odwzorowuje realistyczne oświetlenie, w tym połysk powierzchni.
+    \item Może być stosowany w renderingu czasu rzeczywistego.
+\end{itemize}
+
+\subsection{Wady modelu Phonga}
+\begin{itemize}
+    \item Nie uwzględnia efektów globalnego oświetlenia, takich jak odbicia czy załamania światła.
+    \item Zakłada jednolite odbicie światła dla całej powierzchni, co może powodować brak realizmu.
+\end{itemize}
+
+\subsection{Podsumowanie}
+Model Phonga jest jednym z najczęściej stosowanych modeli oświetlenia w grafice komputerowej. Składa się z trzech komponentów: oświetlenia otoczenia, rozproszonego i odbitego. Mimo swoich ograniczeń, jego prostota i efektywność sprawiają, że jest szeroko stosowany w grafice 3D, szczególnie w aplikacjach działających w czasie rzeczywistym.

@@ -1,0 +1,78 @@
+\section{Działanie i zastosowanie naiwnego klasyfikatora Bayesa}
+
+\subsection{Wprowadzenie}
+Naiwny klasyfikator Bayesa (ang. \textit{Naïve Bayes Classifier}) to probabilistyczny model klasyfikacji, który opiera się na twierdzeniu Bayesa. Jest szeroko stosowany ze względu na prostotę, efektywność obliczeniową oraz dobrą skuteczność w wielu zastosowaniach.
+
+\subsection{Zasada działania}
+Naiwny klasyfikator Bayesa wykorzystuje twierdzenie Bayesa do obliczenia prawdopodobieństwa przynależności obiektu do danej klasy:
+
+\[
+P(C_k | X) = \frac{P(X | C_k) P(C_k)}{P(X)}
+\]
+
+gdzie:
+\begin{itemize}
+    \item \( P(C_k | X) \) – prawdopodobieństwo, że obiekt o cechach \( X \) należy do klasy \( C_k \).
+    \item \( P(X | C_k) \) – prawdopodobieństwo uzyskania cech \( X \) przy założeniu, że obiekt należy do klasy \( C_k \).
+    \item \( P(C_k) \) – prawdopodobieństwo wystąpienia klasy \( C_k \) (tzw. \textit{prior}).
+    \item \( P(X) \) – prawdopodobieństwo wystąpienia cech \( X \) (można je pominąć, ponieważ jest stałe dla wszystkich klas).
+\end{itemize}
+
+\textbf{Założenie naiwności}: cechy są niezależne warunkowo, co oznacza, że prawdopodobieństwo wystąpienia danej cechy nie zależy od innych cech:
+
+\[
+P(X | C_k) = P(x_1 | C_k) P(x_2 | C_k) \dots P(x_n | C_k)
+\]
+
+\subsection{Rodzaje naiwnego klasyfikatora Bayesa}
+\begin{itemize}
+    \item \textbf{Gaussian Naïve Bayes} – dla cech ciągłych, zakłada rozkład normalny.
+    \item \textbf{Multinomial Naïve Bayes} – dla danych dyskretnych, stosowany np. w klasyfikacji tekstów.
+    \item \textbf{Bernoulli Naïve Bayes} – dla cech binarnych (obecność/nieobecność cechy).
+\end{itemize}
+
+\subsection{Zastosowania naiwnego klasyfikatora Bayesa}
+
+\subsubsection{1. Klasyfikacja tekstu i analiza sentymentu}
+\begin{itemize}
+    \item Filtrowanie spamu (np. klasyfikacja e-maili jako spam/nie-spam).
+    \item Analiza sentymentu (np. klasyfikacja recenzji jako pozytywne/negatywne).
+    \item Kategoryzacja dokumentów (np. klasyfikacja artykułów do kategorii tematycznych).
+\end{itemize}
+
+\subsubsection{2. Rozpoznawanie wzorców}
+\begin{itemize}
+    \item Klasyfikacja obrazów (np. rozpoznawanie cyfr ręcznie pisanych).
+    \item Wykrywanie oszustw (np. analiza anomalii w transakcjach bankowych).
+\end{itemize}
+
+\subsubsection{3. Medycyna i diagnostyka}
+\begin{itemize}
+    \item Klasyfikacja chorób na podstawie objawów.
+    \item Wspomaganie diagnoz medycznych.
+\end{itemize}
+
+\subsection{Zalety i wady naiwnego klasyfikatora Bayesa}
+
+\textbf{Zalety:}
+\begin{itemize}
+    \item Prostota i łatwość implementacji.
+    \item Niska złożoność obliczeniowa (\( O(n) \)).
+    \item Skuteczność nawet w przypadku małych zbiorów danych.
+    \item Nie wymaga dużej ilości próbek do działania.
+\end{itemize}
+
+\textbf{Wady:}
+\begin{itemize}
+    \item Założenie niezależności cech – w rzeczywistych danych cechy często są skorelowane.
+    \item Może mieć problemy w przypadku skrajnych wartości cech (np. niewystępowanie pewnej cechy w zbiorze uczącym).
+    \item Wrażliwość na jakość danych wejściowych.
+\end{itemize}
+
+\subsection{Podsumowanie}
+\begin{itemize}
+    \item Naiwny klasyfikator Bayesa wykorzystuje twierdzenie Bayesa do klasyfikacji danych.
+    \item Zakłada niezależność cech, co upraszcza obliczenia.
+    \item Jest szeroko stosowany w klasyfikacji tekstu, rozpoznawaniu wzorców i diagnostyce medycznej.
+    \item Mimo swojej prostoty, często daje dobre wyniki w praktyce.
+\end{itemize}

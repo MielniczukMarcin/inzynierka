@@ -1,0 +1,128 @@
+\section{Metody rozwiązywania układów równań liniowych stosowane do bardzo dużych układów równań (wraz z uzasadnieniem)}
+
+\subsection{Wprowadzenie}
+Układy równań liniowych pojawiają się w wielu dziedzinach nauki i techniki, takich jak analiza danych, fizyka, inżynieria czy sztuczna inteligencja. W przypadku bardzo dużych układów, standardowe metody analityczne okazują się niewydajne ze względu na wysoką złożoność obliczeniową i wymagania pamięciowe.
+
+Wyróżnia się dwie główne klasy metod:
+\begin{itemize}
+    \item \textbf{Metody bezpośrednie} – dają dokładne rozwiązanie w skończonej liczbie kroków, ale mogą być kosztowne obliczeniowo.
+    \item \textbf{Metody iteracyjne} – pozwalają uzyskać rozwiązanie przybliżone w sposób efektywny, szczególnie dla układów rzadkich.
+\end{itemize}
+
+\subsection{Metody bezpośrednie}
+
+\subsubsection{1. Metoda eliminacji Gaussa}
+Metoda ta polega na przekształceniu macierzy współczynników do postaci trójkątnej, a następnie rozwiązaniu układu równań poprzez podstawianie wsteczne.
+
+\textbf{Zalety:}
+\begin{itemize}
+    \item Dokładne rozwiązanie w skończonej liczbie operacji.
+    \item Może być efektywna dla małych i średnich układów.
+\end{itemize}
+
+\textbf{Wady:}
+\begin{itemize}
+    \item Dla dużych układów \( O(n^3) \) operacji sprawia, że metoda staje się niepraktyczna.
+    \item Może być niestabilna numerycznie dla źle uwarunkowanych macierzy.
+\end{itemize}
+
+\subsubsection{2. Metoda faktoryzacji LU}
+Metoda ta polega na rozkładzie macierzy \( A \) na iloczyn macierzy dolnotrójkątnej \( L \) i górnotrójkątnej \( U \), tj. \( A = LU \), co umożliwia szybkie rozwiązanie układu.
+
+\textbf{Zalety:}
+\begin{itemize}
+    \item Skuteczniejsza od eliminacji Gaussa w przypadku wielokrotnego rozwiązywania układów z tą samą macierzą \( A \).
+\end{itemize}
+
+\textbf{Wady:}
+\begin{itemize}
+    \item Koszt obliczeniowy porównywalny z eliminacją Gaussa (\( O(n^3) \)).
+    \item Wymaga pełnej macierzy współczynników, co może być problematyczne dla układów rzadkich.
+\end{itemize}
+
+\subsubsection{3. Metoda faktoryzacji Cholesky’ego}
+Jest to specjalny przypadek faktoryzacji LU, stosowany dla macierzy symetrycznych i dodatnio określonych. Polega na dekompozycji \( A = LL^T \).
+
+\textbf{Zalety:}
+\begin{itemize}
+    \item Szybsza niż ogólna faktoryzacja LU (koszt \( O(n^3/3) \)).
+\end{itemize}
+
+\textbf{Wady:}
+\begin{itemize}
+    \item Ograniczone zastosowanie tylko do macierzy symetrycznych dodatnio określonych.
+\end{itemize}
+
+\subsection{Metody iteracyjne}
+Dla bardzo dużych układów równań, szczególnie gdy macierz jest rzadka, korzystniejsze okazują się metody iteracyjne, które pozwalają uzyskać przybliżone rozwiązanie w krótszym czasie.
+
+\subsubsection{1. Metoda Jacobiego}
+Metoda Jacobiego polega na iteracyjnym poprawianiu przybliżeń, bazując na wartości z poprzedniego kroku:
+\[
+x_i^{(k+1)} = \frac{b_i - \sum_{j \neq i} a_{ij} x_j^{(k)}}{a_{ii}}.
+\]
+
+\textbf{Zalety:}
+\begin{itemize}
+    \item Nadaje się do obliczeń równoległych.
+    \item Prosta w implementacji.
+\end{itemize}
+
+\textbf{Wady:}
+\begin{itemize}
+    \item Wolna zbieżność.
+    \item Działa tylko dla macierzy o dominującej przekątnej.
+\end{itemize}
+
+\subsubsection{2. Metoda Gaussa-Seidla}
+Jest modyfikacją metody Jacobiego, w której nowe wartości \( x_i^{(k+1)} \) są wykorzystywane natychmiast w dalszych obliczeniach.
+
+\textbf{Zalety:}
+\begin{itemize}
+    \item Szybsza zbieżność niż metoda Jacobiego.
+\end{itemize}
+
+\textbf{Wady:}
+\begin{itemize}
+    \item Nie zawsze gwarantuje zbieżność.
+\end{itemize}
+
+\subsubsection{3. Metoda gradientu sprzężonego}
+Jest jedną z najskuteczniejszych metod iteracyjnych do rzadkich układów równań liniowych. Opiera się na minimalizacji funkcji kwadratowej:
+\[
+x^{(k+1)} = x^{(k)} + \alpha_k p^{(k)}.
+\]
+
+\textbf{Zalety:}
+\begin{itemize}
+    \item Złożoność \( O(n) \) w wielu przypadkach, co jest dużą poprawą w stosunku do metod bezpośrednich.
+    \item Skuteczna dla dużych, rzadkich macierzy.
+\end{itemize}
+
+\textbf{Wady:}
+\begin{itemize}
+    \item Wymaga macierzy symetrycznej i dodatnio określonej.
+\end{itemize}
+
+\subsubsection{4. Metody wielosiatkowe}
+Metody wielosiatkowe (\textit{Multigrid methods}) rozwiązują problem na różnych poziomach siatki, co przyspiesza zbieżność.
+
+\textbf{Zalety:}
+\begin{itemize}
+    \item Bardzo szybka zbieżność (często \( O(n) \)).
+\end{itemize}
+
+\textbf{Wady:}
+\begin{itemize}
+    \item Trudność w implementacji i dostosowaniu do konkretnego problemu.
+\end{itemize}
+
+\subsection{Podsumowanie}
+Wybór metody zależy od charakterystyki układu równań:
+\begin{itemize}
+    \item Metody bezpośrednie (Gaussa, LU, Cholesky’ego) są dokładne, ale kosztowne obliczeniowo (\( O(n^3) \)).
+    \item Metody iteracyjne (Jacobiego, Gaussa-Seidla, gradientu sprzężonego) są efektywne dla dużych, rzadkich układów.
+    \item Metody wielosiatkowe są jednymi z najszybszych, ale trudniejsze w implementacji.
+\end{itemize}
+
+W praktyce dla bardzo dużych układów równań liniowych najczęściej stosuje się metody iteracyjne, zwłaszcza metodę gradientu sprzężonego i metody wielosiatkowe, ze względu na ich dobrą skalowalność i efektywność pamięciową.

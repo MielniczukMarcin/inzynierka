@@ -1,0 +1,102 @@
+\section{Funkcja Eulera, relacja kongruencji oraz redukcja modulo działań arytmetycznych}
+
+\subsection{Funkcja Eulera}
+Funkcja Eulera, oznaczana jako \(\varphi(n)\), jest funkcją liczby naturalnej \( n \), określającą liczbę liczb względnie pierwszych z \( n \) (tzn. takich, które nie mają wspólnego dzielnika z \( n \) poza \( 1 \)). 
+
+\subsubsection{Definicja}
+Funkcja Eulera \(\varphi(n)\) jest zdefiniowana jako:
+\[
+\varphi(n) = |\{ k \in \mathbb{N} \ | \ 1 \leq k \leq n, \ \gcd(k, n) = 1 \}|
+\]
+gdzie \(\gcd(k, n)\) oznacza największy wspólny dzielnik liczb \( k \) i \( n \).
+
+\subsubsection{Wzór na funkcję Eulera}
+Jeżeli liczba \( n \) ma rozkład na czynniki pierwsze postaci:
+\[
+n = p_1^{a_1} p_2^{a_2} \dots p_k^{a_k}
+\]
+to funkcja Eulera wyraża się wzorem:
+\[
+\varphi(n) = n \cdot \prod_{i=1}^{k} \left( 1 - \frac{1}{p_i} \right).
+\]
+
+\subsubsection{Przykłady}
+\begin{itemize}
+    \item \(\varphi(6)\): \( 6 = 2 \cdot 3 \), więc:
+    \[
+    \varphi(6) = 6 \left(1 - \frac{1}{2} \right) \left(1 - \frac{1}{3} \right) = 6 \cdot \frac{1}{2} \cdot \frac{2}{3} = 2.
+    \]
+    Liczby względnie pierwsze z \( 6 \) to \( 1, 5 \), więc wynik zgadza się z definicją.
+    \item \(\varphi(12)\): \( 12 = 2^2 \cdot 3 \), więc:
+    \[
+    \varphi(12) = 12 \left(1 - \frac{1}{2} \right) \left(1 - \frac{1}{3} \right) = 12 \cdot \frac{1}{2} \cdot \frac{2}{3} = 4.
+    \]
+    Liczby względnie pierwsze z \( 12 \) to \( 1, 5, 7, 11 \).
+\end{itemize}
+
+\subsection{Relacja kongruencji}
+Relacja kongruencji w arytmetyce modularnej opisuje sytuację, w której dwie liczby mają tę samą resztę z dzielenia przez daną liczbę (moduł).
+
+\subsubsection{Definicja}
+Mówimy, że liczby \( a \) i \( b \) są kongruentne modulo \( m \), jeżeli:
+\[
+a \equiv b \pmod{m} \quad \Leftrightarrow \quad m \text{ dzieli } (a - b), \text{ tj. } m | (a - b).
+\]
+
+\subsubsection{Własności kongruencji}
+\begin{itemize}
+    \item Jeżeli \( a \equiv b \pmod{m} \) i \( c \equiv d \pmod{m} \), to:
+    \begin{itemize}
+        \item \( a + c \equiv b + d \pmod{m} \) (kongruencja zachowuje dodawanie),
+        \item \( a - c \equiv b - d \pmod{m} \) (kongruencja zachowuje odejmowanie),
+        \item \( a \cdot c \equiv b \cdot d \pmod{m} \) (kongruencja zachowuje mnożenie).
+    \end{itemize}
+\end{itemize}
+
+\subsubsection{Przykłady}
+\begin{itemize}
+    \item \( 17 \equiv 5 \pmod{6} \), ponieważ \( 17 - 5 = 12 \) jest podzielne przez \( 6 \).
+    \item \( 26 \equiv 2 \pmod{8} \), ponieważ \( 26 - 2 = 24 \) jest podzielne przez \( 8 \).
+\end{itemize}
+
+\subsection{Redukcja modulo w działaniach arytmetycznych}
+Redukcja modulo oznacza zastąpienie liczby przez jej resztę z dzielenia przez ustalony moduł \( m \).
+
+\subsubsection{Definicja}
+Dla liczby \( a \) i modułu \( m \), liczba \( r \) spełniająca:
+\[
+a \equiv r \pmod{m}, \quad \text{gdzie } 0 \leq r < m
+\]
+nazywana jest resztą z dzielenia \( a \) przez \( m \).
+
+\subsubsection{Przykłady}
+\begin{itemize}
+    \item \( 15 \mod 4 = 3 \), ponieważ \( 15 = 4 \cdot 3 + 3 \), więc reszta to \( 3 \).
+    \item \( 23 \mod 7 = 2 \), ponieważ \( 23 = 7 \cdot 3 + 2 \), więc reszta to \( 2 \).
+\end{itemize}
+
+\subsubsection{Własności redukcji modulo}
+\begin{itemize}
+    \item \( (a + b) \mod m = [(a \mod m) + (b \mod m)] \mod m \).
+    \item \( (a - b) \mod m = [(a \mod m) - (b \mod m)] \mod m \).
+    \item \( (a \cdot b) \mod m = [(a \mod m) \cdot (b \mod m)] \mod m \).
+\end{itemize}
+
+\subsubsection{Przykład działań arytmetycznych modulo}
+Niech \( a = 17 \), \( b = 23 \), \( m = 5 \):
+
+\begin{itemize}
+    \item Dodawanie: \[
+    (17 + 23) \mod 5 = 40 \mod 5 = 0.
+    \]
+    \item Mnożenie: \[
+    (17 \cdot 23) \mod 5 = 391 \mod 5 = 1.
+    \]
+\end{itemize}
+
+\subsection{Podsumowanie}
+\begin{itemize}
+    \item Funkcja Eulera \(\varphi(n)\) określa liczbę liczb względnie pierwszych z \( n \).
+    \item Kongruencja \( a \equiv b \pmod{m} \) oznacza, że liczby \( a \) i \( b \) mają tę samą resztę z dzielenia przez \( m \).
+    \item Redukcja modulo pozwala upraszczać działania arytmetyczne w systemie modularnym.
+\end{itemize}

@@ -1,0 +1,79 @@
+\section{Hierarchia pamięci, z uwzględnieniem pamięci podręcznej oraz pamięci wirtualnej}
+
+\subsection{Wprowadzenie}
+Hierarchia pamięci to struktura organizacyjna systemu komputerowego, która ma na celu optymalne zarządzanie danymi i ich dostępnością. Pamięci o wysokiej szybkości są kosztowne i mają ograniczoną pojemność, natomiast pamięci o dużej pojemności są wolniejsze. Dlatego stosuje się wielopoziomową hierarchię, w której pamięć szybsza działa jako bufor dla pamięci wolniejszej.
+
+\subsection{Poziomy hierarchii pamięci}
+Hierarchia pamięci składa się z kilku poziomów, uporządkowanych według rosnącego czasu dostępu i malejącej szybkości:
+
+\begin{itemize}
+    \item \textbf{Rejestry procesora} – najszybsza pamięć, bezpośrednio dostępna przez CPU.
+    \item \textbf{Pamięć podręczna (cache)} – szybka pamięć buforowa, redukująca liczbę dostępów do pamięci RAM.
+    \item \textbf{Pamięć operacyjna (RAM)} – główna pamięć komputera, przechowująca dane i kod wykonywanego programu.
+    \item \textbf{Pamięć wirtualna} – mechanizm symulujący dodatkową pamięć RAM na dysku twardym.
+    \item \textbf{Pamięć masowa} – dyski SSD, HDD, nośniki optyczne przechowujące dane trwałe.
+    \item \textbf{Pamięć zewnętrzna} – nośniki wymienne, serwery sieciowe, chmura obliczeniowa.
+\end{itemize}
+
+\subsection{Pamięć podręczna (cache)}
+Pamięć podręczna jest małą, ale bardzo szybką pamięcią umieszczoną blisko jednostki centralnej (CPU). Przechowuje często używane dane, co znacząco przyspiesza działanie systemu.
+
+\subsubsection{Poziomy pamięci cache}
+\begin{itemize}
+    \item \textbf{L1} – najszybsza i najmniejsza (kilka-kilkadziesiąt KB), bezpośrednio połączona z rdzeniem procesora.
+    \item \textbf{L2} – większa (setki KB – kilka MB), współdzielona przez kilka rdzeni.
+    \item \textbf{L3} – najwolniejsza z cache procesora, ale największa (kilka MB – kilkadziesiąt MB), wspólna dla wszystkich rdzeni.
+\end{itemize}
+
+\subsubsection{Zasada działania pamięci podręcznej}
+Dane w pamięci podręcznej są przechowywane zgodnie z zasadą lokalności:
+\begin{itemize}
+    \item \textbf{Lokalność czasowa} – jeśli dany blok pamięci został użyty, istnieje duże prawdopodobieństwo, że wkrótce zostanie ponownie użyty.
+    \item \textbf{Lokalność przestrzenna} – jeśli odczytano pewien obszar pamięci, sąsiednie adresy prawdopodobnie będą wkrótce potrzebne.
+\end{itemize}
+
+\subsubsection{Strategie zarządzania pamięcią podręczną}
+\begin{itemize}
+    \item \textbf{Mapowanie bezpośrednie} – każdemu blokowi pamięci RAM odpowiada dokładnie jedna linia cache.
+    \item \textbf{Mapowanie skojarzeniowe} – każdy blok pamięci może być przechowywany w dowolnym miejscu cache.
+    \item \textbf{Mapowanie skojarzeniowe zestawowe} – blok pamięci może być umieszczony w jednym z kilku określonych miejsc.
+\end{itemize}
+
+\subsubsection{Wskaźnik trafień (hit rate)}
+Efektywność pamięci podręcznej określa się za pomocą wskaźnika trafień:
+\[
+Hit\ rate = \frac{\text{Liczba trafień}}{\text{Liczba wszystkich żądań}}
+\]
+Im wyższy wskaźnik trafień, tym lepsza efektywność pamięci podręcznej.
+
+\subsection{Pamięć wirtualna}
+Pamięć wirtualna to technika pozwalająca na zwiększenie dostępnej pamięci operacyjnej poprzez wykorzystanie przestrzeni na dysku twardym jako dodatkowej pamięci.
+
+\subsubsection{Zasada działania}
+Gdy ilość dostępnej pamięci RAM jest niewystarczająca, system operacyjny przenosi rzadko używane strony pamięci na dysk twardy (pliki stronicowania lub wymiany). Proces ten nosi nazwę \textbf{stronicowania}.
+
+\subsubsection{Zalety pamięci wirtualnej}
+\begin{itemize}
+    \item Pozwala uruchamiać programy wymagające więcej pamięci, niż jest fizycznie dostępne.
+    \item Izoluje procesy, zapobiegając ich wzajemnemu nadpisywaniu pamięci.
+\end{itemize}
+
+\subsubsection{Wady pamięci wirtualnej}
+\begin{itemize}
+    \item \textbf{Wolniejsza niż RAM} – dostęp do danych na dysku jest znacznie wolniejszy niż w pamięci operacyjnej.
+    \item \textbf{Zjawisko thrashingu} – częste przenoszenie stron między RAM a dyskiem może prowadzić do spadku wydajności.
+\end{itemize}
+
+\subsubsection{Mechanizmy zarządzania pamięcią wirtualną}
+\begin{itemize}
+    \item \textbf{Stronicowanie} – podział pamięci na strony o stałej wielkości, które mogą być przenoszone między RAM a dyskiem.
+    \item \textbf{Segmentacja} – dzielenie pamięci na segmenty odpowiadające logicznym częściom programu.
+\end{itemize}
+
+\subsection{Podsumowanie}
+\begin{itemize}
+    \item Hierarchia pamięci obejmuje różne poziomy, od szybkich rejestrów po wolne nośniki zewnętrzne.
+    \item Pamięć podręczna redukuje liczbę operacji dostępu do RAM, poprawiając wydajność procesora.
+    \item Pamięć wirtualna umożliwia symulację większej pamięci RAM, ale może powodować spadek wydajności z powodu operacji wymiany stron.
+    \item Efektywność pamięci zależy od wskaźnika trafień w pamięci podręcznej i optymalnego zarządzania pamięcią wirtualną.
+\end{itemize}

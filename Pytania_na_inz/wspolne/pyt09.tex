@@ -1,0 +1,49 @@
+\section{Charakterystyka wybranej metody poszukiwania minimum funkcji jednej zmiennej}
+
+\subsection{Wprowadzenie}
+Poszukiwanie minimum funkcji jednej zmiennej jest kluczowym zagadnieniem w optymalizacji. Istnieje wiele metod rozwiązania tego problemu, które można podzielić na:
+\begin{itemize}
+    \item \textbf{Metody analityczne} – bazujące na pochodnych funkcji.
+    \item \textbf{Metody numeryczne} – bazujące na iteracyjnym przeszukiwaniu przedziału.
+\end{itemize}
+
+Wśród metod numerycznych jedną z najczęściej stosowanych jest \textbf{metoda złotego podziału}, którą omówimy poniżej.
+
+\subsection{Metoda złotego podziału}
+Metoda złotego podziału (ang. \textit{Golden Section Search}) jest algorytmem optymalizacyjnym do znajdowania minimum funkcji jednej zmiennej bez konieczności obliczania pochodnych. Opiera się na iteracyjnym dzieleniu przedziału poszukiwań w stosunku złotej liczby.
+
+\subsubsection{Zasada działania}
+Metoda działa według następujących kroków:
+
+\begin{enumerate}
+    \item Wybieramy początkowy przedział poszukiwań \([a, b]\).
+    \item Obliczamy dwa punkty wewnętrzne:
+    \[
+    x_1 = b - \tau (b - a), \quad x_2 = a + \tau (b - a),
+    \]
+    gdzie \( \tau = \frac{\sqrt{5} - 1}{2} \approx 0.618 \) to współczynnik złotej proporcji.
+    \item Obliczamy wartości funkcji w punktach \( f(x_1) \) i \( f(x_2) \).
+    \item Eliminujemy część przedziału, w której minimum na pewno się nie znajduje:
+    \begin{itemize}
+        \item Jeśli \( f(x_1) > f(x_2) \), to nowe \( a = x_1 \).
+        \item Jeśli \( f(x_1) < f(x_2) \), to nowe \( b = x_2 \).
+    \end{itemize}
+    \item Powtarzamy procedurę do momentu, aż długość przedziału będzie mniejsza niż zadana tolerancja \( \varepsilon \).
+\end{enumerate}
+
+\subsubsection{Zalety metody złotego podziału}
+\begin{itemize}
+    \item \textbf{Nie wymaga obliczania pochodnych}, co jest istotne dla funkcji nieregularnych lub kosztownych obliczeniowo.
+    \item \textbf{Gwarantuje zbieżność} do minimum w skończonej liczbie kroków.
+    \item \textbf{Efektywność} – każde skrócenie przedziału wymaga jedynie jednej dodatkowej oceny funkcji.
+\end{itemize}
+
+\subsubsection{Wady metody złotego podziału}
+\begin{itemize}
+    \item \textbf{Nie jest superszybka} – zbieżność jest liniowa, co oznacza, że potrzeba wielu iteracji dla wysokiej dokładności.
+    \item \textbf{Działa tylko dla jednej zmiennej} – nie nadaje się do optymalizacji funkcji wielu zmiennych.
+    \item \textbf{Wymaga znajomości przedziału początkowego} – nie zawsze jest łatwo określić dobry zakres poszukiwań.
+\end{itemize}
+
+\subsection{Podsumowanie}
+Metoda złotego podziału jest skutecznym narzędziem do znajdowania minimum funkcji jednej zmiennej, gdy nie można wykorzystać metod bazujących na pochodnych. Dzięki eliminacji zbędnych przedziałów poszukiwań umożliwia efektywne zbliżanie się do minimum, choć jej zbieżność nie jest tak szybka jak w metodach gradientowych.

@@ -1,0 +1,89 @@
+\section{Różnice pomiędzy układami kombinacyjnymi i sekwencyjnymi oraz znaczenie takiego podziału w procesie projektowania}
+
+\subsection{Wprowadzenie}
+Układy logiczne dzielimy na:
+\begin{itemize}
+    \item \textbf{Układy kombinacyjne} – wyjście zależy wyłącznie od aktualnych wartości wejściowych.
+    \item \textbf{Układy sekwencyjne} – wyjście zależy zarówno od aktualnych wartości wejściowych, jak i od poprzednich stanów systemu.
+\end{itemize}
+
+Podział ten jest kluczowy w projektowaniu systemów cyfrowych, ponieważ pozwala określić sposób przetwarzania informacji i sterowania.
+
+\subsection{Układy kombinacyjne}
+\subsubsection{Definicja}
+Układy kombinacyjne to układy logiczne, w których wyjście zależy wyłącznie od wartości wejść w danej chwili, bez pamięci stanów poprzednich.
+
+\subsubsection{Charakterystyka}
+\begin{itemize}
+    \item Brak elementów pamiętających – brak rejestrowania poprzednich wartości sygnałów.
+    \item Wyjście zmienia się natychmiast po zmianie wejścia (z niewielkim opóźnieniem wynikającym z propagacji sygnału).
+    \item Opis układu można wyrazić za pomocą funkcji logicznych zmiennych wejściowych.
+\end{itemize}
+
+\subsubsection{Przykłady układów kombinacyjnych}
+\begin{itemize}
+    \item Bramki logiczne (AND, OR, NOT, XOR).
+    \item Sumatory (dodające liczby binarne).
+    \item Multipleksery i demultipleksery.
+    \item Enkodery i dekodery.
+    \item Układy realizujące tablice prawdy.
+\end{itemize}
+
+\subsection{Układy sekwencyjne}
+\subsubsection{Definicja}
+Układy sekwencyjne to układy logiczne, w których wyjście zależy zarówno od aktualnych wartości wejściowych, jak i od wcześniejszego stanu układu.
+
+\subsubsection{Charakterystyka}
+\begin{itemize}
+    \item Posiadają elementy pamiętające (np. przerzutniki).
+    \item Reagują na zmiany wejść, ale ich stan zależy także od wcześniejszych wartości sygnałów.
+    \item Do ich opisu stosuje się tabele stanów i diagramy przejść.
+\end{itemize}
+
+\subsubsection{Przykłady układów sekwencyjnych}
+\begin{itemize}
+    \item Liczniki (np. licznik binarny, Johnsona, pierścieniowy).
+    \item Rejestry przesuwnych.
+    \item Automaty skończone (np. układy sterujące).
+    \item Pamięci cyfrowe (np. SRAM, DRAM).
+\end{itemize}
+
+\subsection{Różnice między układami kombinacyjnymi i sekwencyjnymi}
+
+\begin{table}[h]
+    \centering
+    \renewcommand{\arraystretch}{1.3}
+    \begin{tabular}{|c|c|c|}
+        \hline
+        \textbf{Cecha} & \textbf{Układy kombinacyjne} & \textbf{Układy sekwencyjne} \\
+        \hline
+        \textbf{Zależność wyjścia} & Tylko od wejść & Od wejść i poprzednich stanów \\
+        \hline
+        \textbf{Elementy pamięci} & Brak & Przerzutniki, rejestry \\
+        \hline
+        \textbf{Czas odpowiedzi} & Natychmiastowy & Wymaga taktowania \\
+        \hline
+        \textbf{Opis matematyczny} & Funkcje boolowskie & Tabele i diagramy stanów \\
+        \hline
+        \textbf{Przykłady} & Bramki, sumatory & Liczniki, rejestry \\
+        \hline
+    \end{tabular}
+    \caption{Porównanie układów kombinacyjnych i sekwencyjnych}
+\end{table}
+
+
+\subsection{Znaczenie podziału w procesie projektowania}
+Podział na układy kombinacyjne i sekwencyjne jest kluczowy w projektowaniu systemów cyfrowych. Pozwala on na:
+\begin{itemize}
+    \item \textbf{Optymalizację} – wybór odpowiedniej struktury minimalizuje zużycie zasobów sprzętowych.
+    \item \textbf{Podział funkcjonalny} – rozdzielenie logiki sterującej (sekwencyjnej) i przetwarzania danych (kombinacyjnego).
+    \item \textbf{Projektowanie układów synchronicznych} – układy sekwencyjne wymagają synchronizacji zegara, co jest istotne dla działania procesorów i pamięci.
+    \item \textbf{Elastyczność w implementacji} – układy kombinacyjne można realizować w układach FPGA i ASIC, a układy sekwencyjne są podstawą mikroprocesorów.
+\end{itemize}
+
+\subsection{Podsumowanie}
+\begin{itemize}
+    \item Układy kombinacyjne realizują funkcje logiczne bez pamięci stanu, a układy sekwencyjne wykorzystują pamięć do przechowywania poprzednich stanów.
+    \item Układy sekwencyjne są bardziej złożone, ale niezbędne w sterowaniu i automatyce.
+    \item Podział ten jest kluczowy w projektowaniu systemów cyfrowych i pozwala efektywnie organizować architekturę układów elektronicznych.
+\end{itemize}
