@@ -1,0 +1,129 @@
+\section{Wydajność aplikacji równoległych: lokalność, przyspieszenie, efektywność, prawo Amdahla, prawo Gustafsona}
+
+\subsection{Wprowadzenie}
+Ocena wydajności aplikacji równoległych obejmuje analizę kluczowych parametrów, takich jak przyspieszenie, efektywność oraz wpływ architektury pamięci na wydajność obliczeń. Dwa fundamentalne prawa – prawo Amdahla i prawo Gustafsona – opisują teoretyczne ograniczenia i potencjał skalowania aplikacji równoległych.
+
+\subsection{Lokalność danych}
+Lokalność odnosi się do sposobu, w jaki program odwołuje się do pamięci w czasie wykonywania. Optymalne zarządzanie lokalnością wpływa na wydajność aplikacji równoległych.
+
+\subsubsection{Rodzaje lokalności:}
+\begin{itemize}
+    \item \textbf{Lokalność czasowa (temporal locality)} – jeśli program odwołuje się do określonej komórki pamięci, istnieje duża szansa, że wkrótce ponownie się do niej odwoła.
+    \item \textbf{Lokalność przestrzenna (spatial locality)} – jeśli program odwołuje się do określonej komórki pamięci, istnieje duża szansa, że wkrótce odwoła się do sąsiednich adresów pamięci.
+\end{itemize}
+
+\textbf{Optymalizacja lokalności:}
+\begin{itemize}
+    \item Stosowanie buforowania i pamięci podręcznej (\textit{cache}).
+    \item Strukturyzacja danych i dostępu do pamięci w sposób zoptymalizowany pod kątem układu pamięci.
+    \item Wektoryzacja kodu i unikanie nieuporządkowanego dostępu do pamięci.
+\end{itemize}
+
+\subsection{Przyspieszenie i efektywność}
+
+\subsubsection{1. Przyspieszenie (Speedup)}
+Przyspieszenie mierzy, jak bardzo poprawia się czas wykonania programu po zastosowaniu równoległości.
+
+\begin{equation}
+    S(p) = \frac{T_1}{T_p}
+\end{equation}
+
+gdzie:
+\begin{itemize}
+    \item \( S(p) \) – przyspieszenie dla \( p \) procesorów,
+    \item \( T_1 \) – czas wykonania programu w wersji sekwencyjnej,
+    \item \( T_p \) – czas wykonania programu przy \( p \) procesorach.
+\end{itemize}
+
+\subsubsection{2. Efektywność (Efficiency)}
+Efektywność mierzy, jak dobrze wykorzystano dostępne procesory.
+
+\begin{equation}
+    E(p) = \frac{S(p)}{p} = \frac{T_1}{p T_p}
+\end{equation}
+
+gdzie:
+\begin{itemize}
+    \item \( E(p) \) – efektywność,
+    \item \( p \) – liczba procesorów.
+\end{itemize}
+
+\textbf{Interpretacja:}
+\begin{itemize}
+    \item Jeśli \( E(p) \approx 1 \), oznacza to optymalne wykorzystanie zasobów.
+    \item Jeśli \( E(p) \ll 1 \), oznacza to, że dodanie procesorów nie przynosi oczekiwanej poprawy wydajności.
+\end{itemize}
+
+\subsection{Prawo Amdahla}
+Prawo Amdahla określa teoretyczne ograniczenie przyspieszenia równoległego programu.
+
+\begin{equation}
+    S(p) = \frac{1}{(1 - f) + \frac{f}{p}}
+\end{equation}
+
+gdzie:
+\begin{itemize}
+    \item \( f \) – część programu, która może zostać zrównoleglona,
+    \item \( (1 - f) \) – część programu, która musi pozostać sekwencyjna.
+\end{itemize}
+
+\textbf{Wnioski:}
+\begin{itemize}
+    \item Nawet jeśli \( p \to \infty \), przyspieszenie jest ograniczone przez sekwencyjną część kodu.
+    \item Im większy udział części sekwencyjnej, tym mniejsze możliwe przyspieszenie.
+\end{itemize}
+
+\textbf{Przykład:}
+Jeśli 90\% kodu można zrównoleglić (\( f = 0.9 \)), to dla \( p = 10 \) procesorów:
+
+\begin{equation}
+    S(10) = \frac{1}{(1 - 0.9) + \frac{0.9}{10}} = \frac{1}{0.1 + 0.09} \approx 5.26
+\end{equation}
+
+\subsection{Prawo Gustafsona}
+Prawo Gustafsona sugeruje, że można osiągnąć większe przyspieszenie, jeśli wraz ze wzrostem liczby procesorów rośnie również problem obliczeniowy.
+
+\begin{equation}
+    S(p) = p - \alpha (p - 1)
+\end{equation}
+
+gdzie:
+\begin{itemize}
+    \item \( \alpha \) – proporcja części sekwencyjnej programu,
+    \item \( p \) – liczba procesorów.
+\end{itemize}
+
+\textbf{Wnioski:}
+\begin{itemize}
+    \item Prawo Gustafsona pokazuje, że skalowanie aplikacji jest możliwe, jeśli problem obliczeniowy rośnie wraz z liczbą procesorów.
+    \item W praktyce pozwala to uzyskać lepsze przyspieszenie niż przewidywane przez prawo Amdahla.
+\end{itemize}
+
+\subsection{Porównanie prawa Amdahla i Gustafsona}
+
+\begin{table}[h]
+    \centering
+    \renewcommand{\arraystretch}{1.3}
+    \begin{tabular}{|c|c|c|}
+        \hline
+        \textbf{Cecha} & \textbf{Prawo Amdahla} & \textbf{Prawo Gustafsona} \\
+        \hline
+        Podejście & Analizuje stały problem & Skalowalność dla rosnącego problemu \\
+        \hline
+        Ograniczenie & Narzucone przez część sekwencyjną & Problem obliczeniowy może rosnąć \\
+        \hline
+        Skalowanie & Przy dużej liczbie procesorów ograniczone & Możliwe duże przyspieszenie \\
+        \hline
+        Zastosowanie & Obliczenia o stałym rozmiarze & Obliczenia dynamicznie zwiększające się \\
+        \hline
+    \end{tabular}
+    \caption{Porównanie prawa Amdahla i Gustafsona}
+\end{table}
+
+\subsection{Podsumowanie}
+\begin{itemize}
+    \item Wydajność aplikacji równoległych zależy od przyspieszenia, efektywności oraz lokalności dostępu do pamięci.
+    \item Prawo Amdahla ogranicza maksymalne przyspieszenie przez część sekwencyjną kodu.
+    \item Prawo Gustafsona pokazuje, że przy rosnącym rozmiarze problemu, można osiągnąć większe przyspieszenie.
+    \item Optymalizacja lokalności pamięci i unikanie wąskich gardeł w dostępie do danych zwiększa efektywność obliczeń równoległych.
+\end{itemize}

@@ -1,0 +1,135 @@
+\section{Refaktoryzacja oprogramowania i wybrane jej sposoby}
+
+\subsection{Wprowadzenie}
+Refaktoryzacja oprogramowania to proces restrukturyzacji kodu w celu poprawy jego jakości, czytelności i utrzymania, bez zmiany zewnętrznego zachowania programu. Jest kluczowa dla długoterminowej efektywności projektu i zapobiega zjawisku długu technologicznego.
+
+\subsection{Cele refaktoryzacji}
+\begin{itemize}
+    \item Poprawa czytelności i zrozumiałości kodu.
+    \item Zmniejszenie złożoności i redundancji.
+    \item Ułatwienie przyszłego rozwoju i utrzymania systemu.
+    \item Poprawa wydajności poprzez eliminację zbędnych operacji.
+    \item Zwiększenie testowalności i redukcja błędów.
+\end{itemize}
+
+\subsection{Podstawowe techniki refaktoryzacji}
+
+\subsubsection{1. Ekstrakcja metod (\textit{Extract Method})}
+Polega na wydzieleniu fragmentu kodu do nowej metody w celu zwiększenia czytelności i unikania duplikacji.
+
+\textbf{Przykład przed refaktoryzacją:}
+\begin{verbatim}
+void oblicz() {
+    int suma = 0;
+    for (int i = 0; i < lista.size(); i++) {
+        suma += lista[i];
+    }
+    System.out.println("Suma: " + suma);
+}
+\end{verbatim}
+
+\textbf{Po refaktoryzacji:}
+\begin{verbatim}
+void oblicz() {
+    int suma = sumujElementy();
+    System.out.println("Suma: " + suma);
+}
+
+int sumujElementy() {
+    int suma = 0;
+    for (int i = 0; i < lista.size(); i++) {
+        suma += lista[i];
+    }
+    return suma;
+}
+\end{verbatim}
+
+\subsubsection{2. Zastąpienie magicznych liczb stałymi (\textit{Replace Magic Number with Constant})}
+Pozwala uniknąć nieczytelnych wartości liczbowych w kodzie.
+
+\textbf{Przed:}
+\begin{verbatim}
+double obliczObwod(double promien) {
+    return 2 * 3.14159 * promien;
+}
+\end{verbatim}
+
+\textbf{Po:}
+\begin{verbatim}
+static final double PI = 3.14159;
+
+double obliczObwod(double promien) {
+    return 2 * PI * promien;
+}
+\end{verbatim}
+
+\subsubsection{3. Wprowadzenie obiektu parametru (\textit{Introduce Parameter Object})}
+Zamiast przekazywać wiele argumentów, można przekazać obiekt enkapsulujący dane.
+
+\textbf{Przed:}
+\begin{verbatim}
+void ustawWymiary(int szerokosc, int wysokosc, int glebokosc) { ... }
+\end{verbatim}
+
+\textbf{Po:}
+\begin{verbatim}
+class Wymiary {
+    int szerokosc, wysokosc, glebokosc;
+}
+
+void ustawWymiary(Wymiary wymiary) { ... }
+\end{verbatim}
+
+\subsubsection{4. Usunięcie zbędnych komentarzy}
+Czysty kod powinien być samodokumentujący się, a nadmiar komentarzy może świadczyć o złej jakości kodu.
+
+\textbf{Przed:}
+\begin{verbatim}
+// Dodaje produkt do listy
+listaProduktow.add(produkt);
+\end{verbatim}
+
+\textbf{Po:}
+\begin{verbatim}
+dodajProduktDoListy(produkt);
+\end{verbatim}
+
+\subsubsection{5. Podział dużych klas (\textit{Extract Class})}
+Jeśli klasa ma zbyt wiele odpowiedzialności, warto podzielić ją na mniejsze.
+
+\textbf{Przed:}
+\begin{verbatim}
+class Zamowienie {
+    List<Produkt> produkty;
+    double obliczCene() { ... }
+    void wyslijEmailPotwierdzajacy() { ... }
+}
+\end{verbatim}
+
+\textbf{Po podziale:}
+\begin{verbatim}
+class Zamowienie {
+    List<Produkt> produkty;
+    double obliczCene() { ... }
+}
+
+class Notyfikacja {
+    void wyslijEmailPotwierdzajacy() { ... }
+}
+\end{verbatim}
+
+\subsection{Automatyzacja refaktoryzacji}
+Wiele narzędzi wspiera refaktoryzację, np.:
+\begin{itemize}
+    \item IntelliJ IDEA, Eclipse – refaktoryzacja kodu w językach obiektowych.
+    \item SonarQube – analiza jakości kodu.
+    \item Black, Prettier – formatowanie kodu w Pythonie i JavaScript.
+\end{itemize}
+
+\subsection{Podsumowanie}
+\begin{itemize}
+    \item Refaktoryzacja poprawia jakość kodu i ułatwia jego utrzymanie.
+    \item Wprowadzenie metod, eliminacja magicznych liczb i podział dużych klas zwiększają czytelność.
+    \item Nowoczesne narzędzia wspomagają proces refaktoryzacji.
+    \item Regularna refaktoryzacja zmniejsza ryzyko długu technologicznego.
+\end{itemize}

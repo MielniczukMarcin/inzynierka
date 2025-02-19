@@ -1,0 +1,98 @@
+\section{Rola i umiejscowienie wywołań systemowych w architekturze systemu operacyjnego, sposób ich uruchamiania, przykłady wywołania}
+
+\subsection{Wprowadzenie}
+Wywołania systemowe (ang. \textit{system calls}) to interfejs umożliwiający programom użytkownika komunikację z jądrem systemu operacyjnego. Zapewniają dostęp do zasobów sprzętowych i funkcji systemowych w kontrolowany sposób.
+
+\subsection{Rola wywołań systemowych}
+Wywołania systemowe pełnią kluczową rolę w operacjach takich jak:
+\begin{itemize}
+    \item Zarządzanie procesami (tworzenie, synchronizacja, zakończenie).
+    \item Obsługa plików (otwieranie, zamykanie, czytanie, zapis).
+    \item Komunikacja międzyprocesowa (IPC).
+    \item Zarządzanie pamięcią (alokacja, zwalnianie).
+    \item Obsługa urządzeń wejścia/wyjścia.
+    \item Sieciowa komunikacja.
+\end{itemize}
+
+\subsection{Umiejscowienie wywołań systemowych w architekturze systemu operacyjnego}
+W architekturze systemu operacyjnego wywołania systemowe działają na granicy przestrzeni użytkownika (\textit{user space}) i przestrzeni jądra (\textit{kernel space}).
+
+\begin{itemize}
+    \item \textbf{Przestrzeń użytkownika} – zawiera procesy aplikacji, które nie mają bezpośredniego dostępu do sprzętu.
+    \item \textbf{Przestrzeń jądra} – kontroluje zasoby sprzętowe i wykonuje operacje niskopoziomowe.
+    \item \textbf{Interfejs wywołań systemowych} – działa jako pośrednik, przekazując żądania użytkownika do jądra.
+\end{itemize}
+
+\subsection{Sposób uruchamiania wywołań systemowych}
+Wywołania systemowe są wywoływane przez aplikacje użytkownika w następujący sposób:
+\begin{enumerate}
+    \item Aplikacja użytkownika wywołuje funkcję biblioteczną (np. \texttt{open()} w języku C).
+    \item Funkcja biblioteczna przekazuje żądanie do jądra poprzez instrukcję pułapki (ang. \textit{trap}).
+    \item Jądro przełącza kontekst na przestrzeń jądra i wykonuje odpowiednią funkcję.
+    \item Wynik jest zwracany do aplikacji użytkownika.
+\end{enumerate}
+
+\textbf{Schemat przepływu wywołania systemowego:}
+\begin{verbatim}
+Program użytkownika → Biblioteka standardowa → Przerwanie → Jądro OS → Wynik
+\end{verbatim}
+
+\subsection{Przykłady wywołań systemowych}
+
+\subsubsection{1. Wywołania systemowe do obsługi plików}
+\begin{itemize}
+    \item \textbf{open()} – otwiera plik.
+    \item \textbf{read()} – odczytuje dane z pliku.
+    \item \textbf{write()} – zapisuje dane do pliku.
+    \item \textbf{close()} – zamyka plik.
+\end{itemize}
+
+\textbf{Przykład w języku C:}
+\begin{verbatim}
+int fd = open("plik.txt", O_RDONLY);
+read(fd, buffer, sizeof(buffer));
+close(fd);
+\end{verbatim}
+
+\subsubsection{2. Wywołania systemowe do zarządzania procesami}
+\begin{itemize}
+    \item \textbf{fork()} – tworzy nowy proces.
+    \item \textbf{exec()} – uruchamia nowy program w bieżącym procesie.
+    \item \textbf{wait()} – czeka na zakończenie procesu potomnego.
+    \item \textbf{exit()} – kończy działanie procesu.
+\end{itemize}
+
+\textbf{Przykład użycia \texttt{fork()}:}
+\begin{verbatim}
+pid_t pid = fork();
+if (pid == 0) {
+    printf("Proces potomny\n");
+} else {
+    printf("Proces macierzysty\n");
+}
+\end{verbatim}
+
+\subsubsection{3. Wywołania systemowe do zarządzania pamięcią}
+\begin{itemize}
+    \item \textbf{mmap()} – mapuje plik lub pamięć do przestrzeni adresowej.
+    \item \textbf{brk()} – dynamicznie zmienia rozmiar sterty procesu.
+\end{itemize}
+
+\textbf{Przykład użycia \texttt{mmap()}:}
+\begin{verbatim}
+void *ptr = mmap(NULL, 4096, PROT_READ | PROT_WRITE, MAP_PRIVATE | MAP_ANONYMOUS, -1, 0);
+\end{verbatim}
+
+\subsubsection{4. Wywołania systemowe do komunikacji międzyprocesowej}
+\begin{itemize}
+    \item \textbf{pipe()} – tworzy kanał komunikacyjny między procesami.
+    \item \textbf{shmget()} – tworzy segment pamięci współdzielonej.
+    \item \textbf{socket()} – tworzy gniazdo komunikacyjne.
+\end{itemize}
+
+\subsection{Podsumowanie}
+\begin{itemize}
+    \item Wywołania systemowe są podstawowym mechanizmem komunikacji między aplikacjami a jądrem systemu operacyjnego.
+    \item Są używane do zarządzania plikami, procesami, pamięcią oraz komunikacją międzyprocesową.
+    \item Wywołania systemowe przechodzą z przestrzeni użytkownika do przestrzeni jądra, zapewniając kontrolowany dostęp do zasobów systemowych.
+\end{itemize}

@@ -1,0 +1,108 @@
+\section{Techniki programowania procesorów graficznych wykorzystujące mechanizm wielowątkowości}
+
+\subsection{Wprowadzenie}
+Programowanie procesorów graficznych (GPU) wykorzystuje mechanizmy wielowątkowości do równoległego przetwarzania dużych ilości danych. Model CUDA (Compute Unified Device Architecture) firmy NVIDIA umożliwia efektywne zarządzanie tysiącami wątków działających jednocześnie, co pozwala na znaczące przyspieszenie obliczeń w porównaniu do tradycyjnych procesorów CPU.
+
+\subsection{Podstawowe techniki programowania GPU}
+
+\subsubsection{1. Model wykonania SIMT (Single Instruction Multiple Threads)}
+CUDA wykorzystuje model SIMT, który pozwala na jednoczesne wykonywanie tej samej instrukcji przez wiele wątków.
+
+\textbf{Cechy SIMT:}
+\begin{itemize}
+    \item Wątki są organizowane w grupy zwane \textbf{warpami} (po 32 wątki).
+    \item Każdy multiprocesor strumieniowy (SM) zarządza wieloma warpami.
+    \item Rozgałęzienia warunkowe mogą prowadzić do \textit{thread divergence}, obniżając wydajność.
+\end{itemize}
+
+\subsubsection{2. Hierarchia wątków w CUDA}
+CUDA organizuje wątki w strukturę hierarchiczną:
+\begin{itemize}
+    \item \textbf{Wątki (Threads)} – podstawowa jednostka wykonawcza.
+    \item \textbf{Bloki wątków (Thread Blocks)} – grupa wątków współdzielących pamięć lokalną.
+    \item \textbf{Siatka bloków (Grid of Blocks)} – organizuje bloki dla większych obliczeń.
+\end{itemize}
+
+\textbf{Przykład uruchomienia kernela CUDA:}
+\begin{verbatim}
+kernel<<<numBlocks, threadsPerBlock>>>(d_data);
+\end{verbatim}
+
+\subsubsection{3. Wykorzystanie pamięci współdzielonej (Shared Memory)}
+Pamięć współdzielona pozwala wątkom w obrębie bloku na szybkie wymienianie danych.
+
+\textbf{Przykład użycia pamięci współdzielonej:}
+\begin{verbatim}
+__shared__ int shared_data[256];
+
+int idx = threadIdx.x;
+shared_data[idx] = global_data[idx];
+
+__syncthreads();  // Synchronizacja wątków bloku
+\end{verbatim}
+
+\subsubsection{4. Unikanie \textit{thread divergence}}
+Podział warpa na różne ścieżki wykonania obniża wydajność. Unika się tego poprzez:
+
+\begin{itemize}
+    \item Stosowanie jednolitych operacji dla wszystkich wątków w warpie.
+    \item Unikanie instrukcji warunkowych w obrębie warpa.
+    \item Grupowanie operacji na wspólnych danych.
+\end{itemize}
+
+\subsubsection{5. Optymalizacja dostępu do pamięci globalnej}
+Dostęp do pamięci globalnej (Global Memory) jest wolny, dlatego stosuje się:
+\begin{itemize}
+    \item \textbf{Koalescencję pamięci} – wątki powinny odczytywać dane w uporządkowany sposób.
+    \item \textbf{Pamięć współdzieloną} jako bufor pośredni.
+\end{itemize}
+
+\textbf{Przykład poprawnego dostępu do pamięci globalnej:}
+\begin{verbatim}
+int idx = threadIdx.x + blockIdx.x * blockDim.x;
+int value = global_data[idx];  // Odpowiednie wyrównanie dostępu
+\end{verbatim}
+
+\subsubsection{6. Wykorzystanie wielowątkowości na poziomie bloków i siatek}
+Obliczenia mogą być skalowane przez zwiększenie liczby bloków i siatek.
+
+\textbf{Przykład konfiguracji siatki i bloków:}
+\begin{verbatim}
+dim3 blocksPerGrid(16, 16);
+dim3 threadsPerBlock(32, 32);
+kernel<<<blocksPerGrid, threadsPerBlock>>>(d_data);
+\end{verbatim}
+
+\subsubsection{7. Strumienie CUDA (CUDA Streams)}
+CUDA umożliwia wykonywanie wielu operacji jednocześnie poprzez użycie strumieni.
+
+\textbf{Przykład:}
+\begin{verbatim}
+cudaStream_t stream;
+cudaStreamCreate(&stream);
+kernel<<<grid, block, 0, stream>>>();
+\end{verbatim}
+
+\subsubsection{8. Operacje atomowe}
+CUDA obsługuje operacje atomowe, które pozwalają uniknąć konfliktów podczas modyfikowania współdzielonych danych.
+
+\textbf{Przykład operacji atomowej:}
+\begin{verbatim}
+atomicAdd(&global_sum, value);
+\end{verbatim}
+
+\subsubsection{9. Wykorzystanie bibliotek CUDA}
+CUDA oferuje zestaw gotowych bibliotek, takich jak:
+\begin{itemize}
+    \item \textbf{cuBLAS} – operacje na macierzach.
+    \item \textbf{cuFFT} – szybka transformata Fouriera.
+    \item \textbf{Thrust} – wysokopoziomowe operacje na wektorach.
+\end{itemize}
+
+\subsection{Podsumowanie}
+\begin{itemize}
+    \item CUDA wykorzystuje model SIMT, organizując wątki w warpy i bloki.
+    \item Efektywne wykorzystanie pamięci współdzielonej i optymalizacja dostępu do pamięci poprawiają wydajność.
+    \item Strumienie, operacje atomowe i biblioteki CUDA umożliwiają dalsze przyspieszenie obliczeń.
+    \item Unikanie \textit{thread divergence} i stosowanie koalescencji pamięci jest kluczowe dla wysokiej wydajności.
+\end{itemize}

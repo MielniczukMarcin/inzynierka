@@ -1,0 +1,86 @@
+\section{Budowa indeksowego systemu plików na przykładzie EXT4}
+
+\subsection{Wprowadzenie}
+EXT4 (Fourth Extended Filesystem) to jeden z najczęściej używanych systemów plików w systemach Linux. Jest następcą EXT3 i wprowadza liczne usprawnienia, takie jak większa wydajność, lepsza obsługa dużych plików i zwiększona niezawodność. EXT4 wykorzystuje indeksowaną strukturę plików, co pozwala na efektywne przechowywanie i wyszukiwanie danych.
+
+\subsection{Podział partycji na struktury w EXT4}
+Każda partycja sformatowana w systemie plików EXT4 jest podzielona na kilka podstawowych struktur:
+
+\begin{itemize}
+    \item \textbf{Superblok} – przechowuje informacje o systemie plików.
+    \item \textbf{Bloki grup (Block Groups)} – system dzieli partycję na grupy bloków dla lepszej organizacji.
+    \item \textbf{i-węzły (inodes)} – zawierają metadane plików i katalogów.
+    \item \textbf{Bitmapy bloków i i-węzłów} – zarządzają przydziałem bloków i i-węzłów.
+    \item \textbf{Dane użytkownika} – przechowywane w blokach danych.
+\end{itemize}
+
+\subsection{Struktura systemu plików EXT4}
+
+\begin{itemize}
+    \item \textbf{Superblok} – zawiera kluczowe informacje o systemie plików, takie jak:
+    \begin{itemize}
+        \item Rozmiar systemu plików.
+        \item Liczba bloków i i-węzłów.
+        \item Znacznik czasu ostatniego montowania.
+        \item Flagi systemowe i opcje montowania.
+    \end{itemize}
+
+    \item \textbf{Grupy bloków} – EXT4 dzieli przestrzeń dyskową na grupy bloków, co poprawia wydajność dostępu do danych. Każda grupa zawiera:
+    \begin{itemize}
+        \item Superblok (opcjonalnie w każdej grupie).
+        \item Bitmapę bloków – określa, które bloki są wolne/zajęte.
+        \item Bitmapę i-węzłów – przechowuje informacje o dostępnych i-węzłach.
+        \item Tablicę i-węzłów – przechowuje struktury i-węzłów.
+        \item Dane użytkownika – rzeczywista zawartość plików.
+    \end{itemize}
+
+    \item \textbf{i-węzły (inodes)} – każdemu plikowi/katalogowi odpowiada jeden i-węzeł, który zawiera:
+    \begin{itemize}
+        \item Identyfikator właściciela i grupy.
+        \item Uprawnienia dostępu.
+        \item Znaczniki czasu (utworzenia, modyfikacji, ostatniego dostępu).
+        \item Wskaźniki do bloków danych przechowujących zawartość pliku.
+    \end{itemize}
+
+    \item \textbf{Struktura katalogów} – katalogi są specjalnymi plikami zawierającymi listę nazw plików i odpowiadających im i-węzłów.
+
+    \item \textbf{Bloki danych} – przechowują rzeczywiste treści plików.
+\end{itemize}
+
+\subsection{Sposób przechowywania informacji o plikach i katalogach}
+
+\subsubsection{1. System indeksowania plików}
+EXT4 wykorzystuje strukturę i-węzłów do przechowywania metadanych plików. Każdy i-węzeł zawiera wskaźniki do bloków danych:
+\begin{itemize}
+    \item Wskaźniki bezpośrednie – adresują pierwsze kilka bloków pliku.
+    \item Wskaźnik pośredni – wskazuje na blok zawierający adresy kolejnych bloków.
+    \item Wskaźnik podwójnie pośredni – wskazuje na blok, który zawiera wskaźniki do bloków pośrednich.
+    \item Wskaźnik potrójnie pośredni – umożliwia obsługę bardzo dużych plików.
+\end{itemize}
+
+\subsubsection{2. Extents – optymalizacja przydzielania bloków}
+EXT4 wprowadza mechanizm \textit{extents}, który zastępuje tradycyjne listy bloków. \textit{Extents} to ciągłe fragmenty przestrzeni dyskowej przypisane do pliku, co:
+\begin{itemize}
+    \item Zmniejsza fragmentację.
+    \item Przyspiesza operacje odczytu i zapisu.
+    \item Poprawia wydajność obsługi dużych plików.
+\end{itemize}
+
+\subsubsection{3. Jurnalowanie (journaling)}
+EXT4 wykorzystuje \textbf{dziennik} (\textit{journal}) do rejestrowania operacji przed ich zapisaniem na dysku, co zapobiega utracie danych w przypadku awarii.
+
+\textbf{Tryby pracy journalingu:}
+\begin{itemize}
+    \item \textbf{Journal} – pełne zapisywanie operacji, największa niezawodność, ale najwolniejsza metoda.
+    \item \textbf{Ordered} (domyślny) – zapis metadanych do dziennika, a następnie danych na dysk.
+    \item \textbf{Writeback} – metadane mogą być zapisywane przed danymi, co zwiększa ryzyko utraty danych.
+\end{itemize}
+
+\subsection{Podsumowanie}
+\begin{itemize}
+    \item EXT4 to nowoczesny system plików wykorzystywany w systemach Linux.
+    \item Struktura EXT4 obejmuje superblok, grupy bloków, tablice i-węzłów oraz bloki danych.
+    \item i-węzły przechowują metadane plików i wskazują na ich rzeczywiste dane.
+    \item Mechanizm \textit{extents} redukuje fragmentację i zwiększa wydajność.
+    \item Journaling chroni przed utratą danych w przypadku awarii systemu.
+\end{itemize}

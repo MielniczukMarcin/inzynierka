@@ -1,0 +1,89 @@
+\section{Charakterystyka środków dostępnych w języku CUDA C/C++ i sposoby ich wykorzystania}
+
+\subsection{Wprowadzenie}
+CUDA (Compute Unified Device Architecture) to platforma i model programowania opracowany przez firmę NVIDIA, umożliwiający wykorzystanie procesorów graficznych (GPU) do obliczeń równoległych. CUDA C/C++ to rozszerzenie języka C/C++, które pozwala na definiowanie i uruchamianie funkcji równoległych na GPU.
+
+\subsection{Podstawowe środki dostępne w języku CUDA}
+
+\subsubsection{1. Hierarchia wątków CUDA}
+CUDA organizuje obliczenia w hierarchii wątków:
+\begin{itemize}
+    \item \textbf{Wątki (threads)} – podstawowa jednostka obliczeniowa.
+    \item \textbf{Bloki wątków (blocks)} – grupy wątków, które współdzielą pamięć współdzieloną (\textit{shared memory}).
+    \item \textbf{Siatka bloków (grid)} – zbiór bloków uruchamianych na GPU.
+\end{itemize}
+
+\textbf{Przykład uruchomienia kernela CUDA:}
+\begin{verbatim}
+kernel<<<numBlocks, numThreads>>>(d_data);
+\end{verbatim}
+
+\subsubsection{2. Model pamięci w CUDA}
+CUDA udostępnia różne rodzaje pamięci:
+\begin{itemize}
+    \item \textbf{Pamięć globalna (global memory)} – dostępna dla wszystkich wątków, ale o wysokich opóźnieniach.
+    \item \textbf{Pamięć współdzielona (shared memory)} – współdzielona w obrębie bloku wątków, szybka.
+    \item \textbf{Pamięć lokalna (local memory)} – prywatna dla wątku, ale przechowywana w pamięci globalnej.
+    \item \textbf{Pamięć rejestrów (register memory)} – najszybsza, ale o ograniczonym rozmiarze.
+    \item \textbf{Pamięć stała (constant memory)} – zoptymalizowana dla niezmiennych danych.
+    \item \textbf{Pamięć tekstur i powierzchni (texture \& surface memory)} – zoptymalizowana dla operacji na obrazach.
+\end{itemize}
+
+\textbf{Przykład alokacji pamięci globalnej:}
+\begin{verbatim}
+cudaMalloc((void**)&d_array, size);
+cudaMemcpy(d_array, h_array, size, cudaMemcpyHostToDevice);
+\end{verbatim}
+
+\subsubsection{3. Definiowanie i uruchamianie kerneli}
+Funkcje CUDA (kernels) są oznaczane kwalifikatorem \texttt{\_\_global\_\_} i wykonywane równolegle przez wiele wątków.
+
+\textbf{Przykład prostego kernela:}
+\begin{verbatim}
+__global__ void add(int *a, int *b, int *c) {
+    int idx = threadIdx.x;
+    c[idx] = a[idx] + b[idx];
+}
+\end{verbatim}
+
+\subsubsection{4. Synchronizacja wątków}
+CUDA udostępnia mechanizmy synchronizacji:
+\begin{itemize}
+    \item \textbf{\texttt{\_\_syncthreads()}} – synchronizacja wątków w obrębie bloku.
+    \item \textbf{Atomiczne operacje} – zapewniają bezpieczne operacje na współdzielonych danych.
+\end{itemize}
+
+\textbf{Przykład synchronizacji:}
+\begin{verbatim}
+__shared__ int shared_data[256];
+__syncthreads();
+\end{verbatim}
+
+\subsubsection{5. Strumienie i wielowątkowość}
+CUDA pozwala na równoczesne wykonywanie wielu operacji za pomocą strumieni (\textit{streams}) i kolejek.
+
+\textbf{Przykład użycia strumieni:}
+\begin{verbatim}
+cudaStream_t stream;
+cudaStreamCreate(&stream);
+kernel<<<grid, block, 0, stream>>>();
+\end{verbatim}
+
+\subsubsection{6. Obsługa błędów w CUDA}
+CUDA zapewnia mechanizmy obsługi błędów za pomocą makr i funkcji \texttt{cudaGetErrorString()}.
+
+\textbf{Przykład sprawdzania błędów:}
+\begin{verbatim}
+cudaError_t err = cudaMalloc((void**)&d_array, size);
+if (err != cudaSuccess) {
+    printf("CUDA error: %s\n", cudaGetErrorString(err));
+}
+\end{verbatim}
+
+\subsection{Podsumowanie}
+\begin{itemize}
+    \item CUDA C/C++ udostępnia mechanizmy do programowania równoległego na GPU.
+    \item Wątki organizowane są w bloki i siatki, które korzystają z różnych typów pamięci.
+    \item Istnieją mechanizmy synchronizacji, obsługi błędów i optymalizacji wydajności.
+    \item CUDA znajduje zastosowanie w obliczeniach naukowych, grafice, AI i modelowaniu numerycznym.
+\end{itemize}

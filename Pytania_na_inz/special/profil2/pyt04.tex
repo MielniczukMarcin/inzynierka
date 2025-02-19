@@ -1,0 +1,90 @@
+\section{Definicja programowania równoległego i współbieżnego; popularne języki; biblioteki i API}
+
+\subsection{Wprowadzenie}
+Programowanie równoległe i współbieżne to dwa podejścia do realizacji obliczeń wielowątkowych, które różnią się sposobem wykonywania zadań i organizacją pracy procesów.
+
+\subsection{Definicja programowania równoległego i współbieżnego}
+
+\subsubsection{1. Programowanie równoległe (Parallel Computing)}
+Programowanie równoległe polega na jednoczesnym wykonywaniu wielu operacji w celu przyspieszenia obliczeń.
+
+\textbf{Cechy:}
+\begin{itemize}
+    \item Wiele zadań wykonywanych jednocześnie na różnych procesorach lub rdzeniach.
+    \item Typowe w obliczeniach naukowych, grafice komputerowej i AI.
+    \item Wymaga synchronizacji i zarządzania współdzielonymi zasobami.
+\end{itemize}
+
+\textbf{Przykłady zastosowań:}
+\begin{itemize}
+    \item Przetwarzanie dużych zbiorów danych (Big Data).
+    \item Algorytmy sztucznej inteligencji (trenowanie sieci neuronowych).
+    \item Obliczenia numeryczne i symulacje fizyczne.
+\end{itemize}
+
+\subsubsection{2. Programowanie współbieżne (Concurrent Computing)}
+Programowanie współbieżne umożliwia wykonywanie wielu zadań w jednym czasie, ale niekoniecznie równolegle.
+
+\textbf{Cechy:}
+\begin{itemize}
+    \item Wiele procesów może być wykonywanych przeplatająco na jednym rdzeniu.
+    \item Stosowane w systemach operacyjnych i aplikacjach sieciowych.
+    \item Może wykorzystywać mechanizmy wątków, procesów i asynchronicznego wykonywania kodu.
+\end{itemize}
+
+\textbf{Przykłady zastosowań:}
+\begin{itemize}
+    \item Obsługa wielu klientów w serwerach HTTP.
+    \item Zarządzanie zadaniami w systemie operacyjnym.
+    \item Aplikacje działające w tle (np. pobieranie plików).
+\end{itemize}
+
+\subsection{Popularne języki programowania do programowania równoległego i współbieżnego}
+
+\begin{itemize}
+    \item \textbf{C/C++} – języki niskopoziomowe, szeroko stosowane w aplikacjach wysokowydajnościowych.
+    \item \textbf{Python} – wspiera współbieżność dzięki bibliotekom takim jak \texttt{threading} i \texttt{multiprocessing}.
+    \item \textbf{Java} – posiada wbudowaną obsługę wielowątkowości (\texttt{java.util.concurrent}).
+    \item \textbf{Go} – zoptymalizowany pod kątem współbieżności dzięki lekkim wątkom (\textit{goroutines}).
+    \item \textbf{Rust} – zapewnia bezpieczne programowanie równoległe, eliminując błędy związane z dostępem do pamięci.
+    \item \textbf{CUDA C/C++} – umożliwia programowanie równoległe na GPU.
+\end{itemize}
+
+\subsection{Biblioteki i API do programowania równoległego i współbieżnego}
+
+\subsubsection{1. Wątki i synchronizacja}
+\begin{itemize}
+    \item \textbf{POSIX Threads (pthread)} – standardowa biblioteka w C do obsługi wątków.
+    \item \textbf{std::thread} (C++) – biblioteka do obsługi wątków w nowoczesnym C++.
+    \item \textbf{Java Threads} – obsługa wielowątkowości wbudowana w język Java.
+    \item \textbf{asyncio (Python)} – obsługa asynchronicznych operacji wejścia/wyjścia.
+\end{itemize}
+
+\subsubsection{2. Równoległe przetwarzanie na wielu rdzeniach CPU}
+\begin{itemize}
+    \item \textbf{OpenMP} – standard do równoległego programowania w C, C++ i Fortranie.
+    \item \textbf{TBB (Threading Building Blocks)} – biblioteka firmy Intel do równoległego programowania w C++.
+    \item \textbf{multiprocessing (Python)} – umożliwia równoległe wykonywanie kodu na wielu procesorach.
+\end{itemize}
+
+\subsubsection{3. Programowanie na GPU}
+\begin{itemize}
+    \item \textbf{CUDA} – platforma NVIDIA do programowania na GPU.
+    \item \textbf{OpenCL} – otwarty standard do obliczeń równoległych na różnych platformach.
+    \item \textbf{HIP (Heterogeneous-Compute Interface for Portability)} – API firmy AMD do programowania GPU.
+\end{itemize}
+
+\subsubsection{4. Programowanie rozproszone}
+\begin{itemize}
+    \item \textbf{MPI (Message Passing Interface)} – standard komunikacji między procesami w klastrach komputerowych.
+    \item \textbf{Apache Spark} – framework do obliczeń rozproszonych na dużych zbiorach danych.
+    \item \textbf{Dask (Python)} – narzędzie do obliczeń równoległych na dużych zbiorach danych.
+\end{itemize}
+
+\subsection{Podsumowanie}
+\begin{itemize}
+    \item Programowanie równoległe pozwala na jednoczesne wykonywanie wielu operacji na różnych procesorach lub rdzeniach.
+    \item Programowanie współbieżne umożliwia wykonywanie wielu zadań jednocześnie, ale nie zawsze równolegle.
+    \item Wiele języków programowania (C++, Python, Java, Go, CUDA) wspiera techniki wielowątkowe i równoległe.
+    \item Biblioteki i API, takie jak OpenMP, MPI, CUDA, OpenCL i \texttt{pthread}, ułatwiają implementację obliczeń równoległych i współbieżnych.
+\end{itemize}

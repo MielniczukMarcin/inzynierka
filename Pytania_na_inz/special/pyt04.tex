@@ -1,0 +1,161 @@
+\section{Główne wzorce architektoniczne oprogramowania}
+
+\subsection{Wprowadzenie}
+Wzorce architektoniczne definiują wysokopoziomowe struktury organizacyjne systemów oprogramowania. Określają sposób podziału systemu na komponenty oraz ich interakcje, co pozwala na efektywne projektowanie skalowalnych, elastycznych i łatwych w utrzymaniu aplikacji.
+
+\subsection{Podstawowe wzorce architektoniczne}
+
+\subsubsection{1. Architektura warstwowa (Layered Architecture)}
+\textbf{Opis:}  
+System podzielony jest na warstwy, z których każda realizuje określoną funkcjonalność i komunikuje się z warstwami sąsiednimi.
+
+\textbf{Struktura:}
+\begin{itemize}
+    \item Warstwa prezentacji – interfejs użytkownika.
+    \item Warstwa logiki biznesowej – przetwarzanie danych i reguły aplikacji.
+    \item Warstwa dostępu do danych – komunikacja z bazą danych.
+    \item Warstwa danych – baza danych i systemy przechowywania informacji.
+\end{itemize}
+
+\textbf{Zalety:}
+\begin{itemize}
+    \item Modularność i łatwość testowania.
+    \item Możliwość oddzielenia interfejsu od logiki biznesowej.
+\end{itemize}
+
+\textbf{Wady:}
+\begin{itemize}
+    \item Może prowadzić do spadku wydajności z powodu licznych warstw pośrednich.
+\end{itemize}
+
+\subsubsection{2. Architektura klient-serwer (Client-Server)}
+\textbf{Opis:}  
+System podzielony jest na dwa główne komponenty: klienta, który żąda usług, oraz serwer, który te usługi udostępnia.
+
+\textbf{Zastosowanie:}
+\begin{itemize}
+    \item Aplikacje internetowe (np. HTTP, REST API).
+    \item Systemy baz danych (np. MySQL, PostgreSQL).
+\end{itemize}
+
+\textbf{Zalety:}
+\begin{itemize}
+    \item Centralizacja logiki aplikacji na serwerze.
+    \item Łatwa aktualizacja klienta bez wpływu na serwer.
+\end{itemize}
+
+\textbf{Wady:}
+\begin{itemize}
+    \item Wysokie obciążenie serwera przy dużej liczbie użytkowników.
+\end{itemize}
+
+\subsubsection{3. Architektura mikroserwisowa (Microservices)}
+\textbf{Opis:}  
+System składa się z wielu niezależnych usług (mikroserwisów), które komunikują się przez API.
+
+\textbf{Zastosowanie:}
+\begin{itemize}
+    \item Aplikacje chmurowe i rozproszone.
+    \item Duże systemy internetowe (np. Netflix, Amazon).
+\end{itemize}
+
+\textbf{Zalety:}
+\begin{itemize}
+    \item Skalowalność i łatwość wdrażania poszczególnych komponentów.
+    \item Możliwość użycia różnych technologii w różnych mikroserwisach.
+\end{itemize}
+
+\textbf{Wady:}
+\begin{itemize}
+    \item Złożoność zarządzania komunikacją między usługami.
+\end{itemize}
+
+\subsubsection{4. Architektura zdarzeniowa (Event-Driven Architecture)}
+\textbf{Opis:}  
+Komponenty systemu komunikują się poprzez zdarzenia asynchroniczne.
+
+\textbf{Zastosowanie:}
+\begin{itemize}
+    \item Systemy czasu rzeczywistego (np. IoT, giełda papierów wartościowych).
+\end{itemize}
+
+\textbf{Zalety:}
+\begin{itemize}
+    \item Wysoka responsywność i skalowalność.
+\end{itemize}
+
+\textbf{Wady:}
+\begin{itemize}
+    \item Złożoność obsługi komunikacji i zarządzania stanem.
+\end{itemize}
+
+\subsubsection{5. Architektura model-widok-kontroler (MVC – Model-View-Controller)}
+\textbf{Opis:}  
+System podzielony na trzy komponenty:
+\begin{itemize}
+    \item \textbf{Model} – logika biznesowa i dane.
+    \item \textbf{Widok (View)} – interfejs użytkownika.
+    \item \textbf{Kontroler (Controller)} – obsługuje interakcje użytkownika.
+\end{itemize}
+
+\textbf{Zastosowanie:}
+\begin{itemize}
+    \item Aplikacje internetowe (np. frameworki jak Django, Spring MVC).
+\end{itemize}
+
+\textbf{Zalety:}
+\begin{itemize}
+    \item Oddzielenie warstw poprawia organizację kodu.
+\end{itemize}
+
+\textbf{Wady:}
+\begin{itemize}
+    \item Może prowadzić do złożoności w większych systemach.
+\end{itemize}
+
+\subsubsection{6. Architektura repozytorium (Repository Architecture)}
+\textbf{Opis:}  
+System składa się z centralnego repozytorium danych, z którego korzystają wszystkie komponenty.
+
+\textbf{Zastosowanie:}
+\begin{itemize}
+    \item Kompilatory (np. GCC).
+    \item Systemy zarządzania wiedzą.
+\end{itemize}
+
+\textbf{Zalety:}
+\begin{itemize}
+    \item Spójność danych w całym systemie.
+\end{itemize}
+
+\textbf{Wady:}
+\begin{itemize}
+    \item Możliwy wąskie gardło w dostępie do repozytorium.
+\end{itemize}
+
+\subsubsection{7. Architektura rurek i filtrów (Pipe-and-Filter)}
+\textbf{Opis:}  
+System składa się z przetwarzających dane komponentów (\textit{filtrów}), które są połączone kanałami przepływu danych (\textit{rurkami}).
+
+\textbf{Zastosowanie:}
+\begin{itemize}
+    \item Przetwarzanie strumieni danych (np. potok w systemach UNIX).
+\end{itemize}
+
+\textbf{Zalety:}
+\begin{itemize}
+    \item Możliwość łatwego komponowania procesów.
+\end{itemize}
+
+\textbf{Wady:}
+\begin{itemize}
+    \item Może powodować wysoką latencję przy dużych zbiorach danych.
+\end{itemize}
+
+\subsection{Podsumowanie}
+\begin{itemize}
+    \item Wzorce architektoniczne pomagają w organizacji systemów oprogramowania.
+    \item Architektura warstwowa jest klasyczna i szeroko stosowana.
+    \item Mikroserwisy i architektura zdarzeniowa są preferowane w nowoczesnych, skalowalnych systemach.
+    \item Wybór wzorca zależy od wymagań projektu, wydajności i skalowalności systemu.
+\end{itemize}
