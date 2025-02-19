@@ -1,0 +1,6 @@
+# Pliki tymczasowe LaTeX
+*.aux
+*.log
+*.out
+*.synctex.gz
+
