@@ -2,3 +2,8 @@
 2. Classifying_Student_Achievement_Using_K-NN_Based_on_Feature_Normalization_Techniques - https://ieeexplore.ieee.org/document/10295372
 3. podstawy_uczenia - https://winntbg.bg.agh.edu.pl/skrypty4/0599/podstawy_uczenia.pdf
 4. https://helion.pl/ksiazki/uczenie-maszynowe-z-uzyciem-scikit-learn-keras-i-tensorflow-wydanie-iii-aurelien-geron,uczem3.htm?srsltid=AfmBOoo1SXKX-QrXy4nAvVxybG5mpdfs0DR3RO6XaHd3SVEp9EcPjfXu#format/d
+5. An_Implementation_of_Naive_Bayes_Classifier - https://ieeexplore.ieee.org/document/8947658
+6. svm - https://web.mit.edu/6.034/wwwbob/svm.pdf
+7. Optimization_Analysis_of_Neural_Network_Algorithms_Using_Bagging_Techniques_on_Classification_of_Date_Fruit_Types - https://ieeexplore.ieee.org/document/10006986
+8. Competitive_Analysis_of_the_Top_Gradient_Boosting_Machine_Learning_Algorithms - https://ieeexplore.ieee.org/document/9362840
+9. A_Three-dimension_Stacking_Model_with_Modified_Genetic_Algorithm - https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=9971062
