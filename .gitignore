@@ -4,8 +4,4 @@
 *.out
 *.synctex.gz
 
-# Pliki Pythonowe
-
-*.pyc
-*.pyo
 
