@@ -5,7 +5,7 @@
 *.synctex.gz
 
 # Pliki Pythonowe
-__pycache__/
+
 *.pyc
 *.pyo
-venv/
+
