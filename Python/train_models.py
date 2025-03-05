@@ -1,10 +1,10 @@
 import time
 import pandas as pd
-from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score
 from sklearn.ensemble import RandomForestClassifier, AdaBoostClassifier
 from sklearn.naive_bayes import GaussianNB
 from sklearn.tree import DecisionTreeClassifier
 from sklearn.neighbors import KNeighborsClassifier
+from evaluate import evaluate_model  # Nowy import
 
 def train_and_evaluate(X_train, X_test, y_train, y_test):
     """
@@ -25,13 +25,9 @@ def train_and_evaluate(X_train, X_test, y_train, y_test):
     for name, clf in classifiers.items():
         start_time = time.time()
         clf.fit(X_train, y_train)
-        y_pred = clf.predict(X_test)
         end_time = time.time()
 
-        accuracy = accuracy_score(y_test, y_pred)
-        precision = precision_score(y_test, y_pred, average='macro')
-        recall = recall_score(y_test, y_pred, average='macro')
-        f1 = f1_score(y_test, y_pred, average='macro')
+        accuracy, precision, recall, f1 = evaluate_model(clf, X_test, y_test)
         exec_time = end_time - start_time
 
         results.append([name, accuracy, precision, recall, f1, exec_time])
