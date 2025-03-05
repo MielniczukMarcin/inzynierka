@@ -2,22 +2,17 @@ import time
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
-from sklearn.model_selection import train_test_split
 from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score
-from sklearn.datasets import load_iris
 from sklearn.ensemble import RandomForestClassifier, AdaBoostClassifier
 from sklearn.naive_bayes import GaussianNB
 from sklearn.tree import DecisionTreeClassifier
 from sklearn.neighbors import KNeighborsClassifier
+from load_data import load_dataset  # Nowy import
 
 # --- 1. Wczytanie danych ---
-data = load_iris()
-X, y = data.data, data.target
+X_train, X_test, y_train, y_test = load_dataset()
 
-# --- 2. Podział na zbiór treningowy i testowy ---
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=42)
-
-# --- 3. Lista klasyfikatorów ---
+# --- 2. Lista klasyfikatorów ---
 classifiers = {
     "Decision Tree": DecisionTreeClassifier(),
     "k-NN": KNeighborsClassifier(),
@@ -26,7 +21,7 @@ classifiers = {
     "AdaBoost": AdaBoostClassifier()
 }
 
-# --- 4. Trenowanie i ewaluacja modeli ---
+# --- 3. Trenowanie i ewaluacja modeli ---
 results = []
 for name, clf in classifiers.items():
     start_time = time.time()
@@ -42,14 +37,13 @@ for name, clf in classifiers.items():
 
     results.append([name, accuracy, precision, recall, f1, exec_time])
 
-# --- 5. Konwersja wyników do DataFrame ---
+# --- 4. Konwersja wyników do DataFrame ---
 df_results = pd.DataFrame(results, columns=["Model", "Accuracy", "Precision", "Recall", "F1-score", "Time (s)"])
 
-# --- 6. Wyświetlenie tabeli wyników ---
+# --- 5. Wyświetlenie tabeli wyników ---
 print(df_results)
 
-
-# --- 7. Wizualizacja wyników ---
+# --- 6. Wizualizacja wyników ---
 plt.figure(figsize=(10, 5))
 df_results.set_index("Model")[["Accuracy", "Precision", "Recall", "F1-score"]].plot(kind="bar")
 plt.title("Porównanie klasyfikatorów")
