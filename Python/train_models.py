@@ -1,10 +1,11 @@
 import time
 import pandas as pd
-from sklearn.ensemble import RandomForestClassifier, AdaBoostClassifier
+from sklearn.ensemble import RandomForestClassifier, AdaBoostClassifier, GradientBoostingClassifier
 from sklearn.naive_bayes import GaussianNB
 from sklearn.tree import DecisionTreeClassifier
 from sklearn.neighbors import KNeighborsClassifier
-from evaluate import evaluate_model  # Nowy import
+from sklearn.svm import SVC  # Nowy klasyfikator SVM
+from evaluate import evaluate_model  # Import funkcji do oceny modeli
 
 def train_and_evaluate(X_train, X_test, y_train, y_test):
     """
@@ -18,7 +19,9 @@ def train_and_evaluate(X_train, X_test, y_train, y_test):
         "k-NN": KNeighborsClassifier(),
         "Naive Bayes": GaussianNB(),
         "Random Forest": RandomForestClassifier(),
-        "AdaBoost": AdaBoostClassifier()
+        "AdaBoost": AdaBoostClassifier(),
+        "SVM": SVC(),  # Nowy klasyfikator SVM
+        "Gradient Boosting": GradientBoostingClassifier()  # Nowy model boostingowy
     }
 
     results = []
